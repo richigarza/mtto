@@ -87,13 +87,12 @@ CREATE TABLE SYSMAN.REFACCION(
   CONSTRAINT REFACCION_EQUIPO FOREIGN KEY (equipo_id) REFERENCES SYSMAN.EQUIPO(id)
 )DEFAULT CHARSET=utf8 COMMENT "Tabla de Refacciones requeridas por equipo";
 
-
 CREATE TABLE SYSMAN.UNIDAD_EQUIPO(
   id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del Registro.",
   equipo_id int(10) NOT NULL COMMENT "Llave Foranea. Tabla SYSMAN.Equipo. Identificador del equipo",
   departamento_id int(10) NOT NULL COMMENT "Llave Foranea. Tabla SYSMAN.Departamento. Departamento donde se encuentra ubicada la unidad",
   descripcion varchar(255) COMMENT "Descripcion o comentarios de la unidad",
-  ultimo_mantenimiento DATE COMMENT "Ultimo mantenimiento a la unidad",
+  ultimo_mantenimiento TIMESTAMP COMMENT "Ultimo mantenimiento a la unidad",
   estatus varchar(1) NOT NULL DEFAULT "A" COMMENT "Estatus del Registro. A - Activo / I - Inactivo.",
   ultima_fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT "Última Fecha de actualización del registro.",
   ultimo_editor varchar(100) NOT NULL COMMENT "Ultima persona que edito el registro",
@@ -103,7 +102,6 @@ CREATE TABLE SYSMAN.UNIDAD_EQUIPO(
   CONSTRAINT UNIDAD_EQUIPO_EQUIPO FOREIGN KEY (equipo_id) REFERENCES SYSMAN.EQUIPO(id),
   CONSTRAINT UNIDAD_EQUIPO_DEPARTAMENTO FOREIGN KEY (departamento_id) REFERENCES SYSMAN.DEPARTAMENTO(id)
 )DEFAULT CHARSET=utf8 COMMENT "Tabla de unidad existentes por cada tipo de equipo";
-
 
 CREATE TABLE SYSMAN.RUTINA(
   id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT "Identificador único del Registro.",
