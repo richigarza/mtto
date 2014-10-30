@@ -1,0 +1,41 @@
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+#panelBusqueda{
+	width: 95%;
+	margin: auto;
+}
+
+h5{
+	display: inline-block;
+}
+
+.espaciadorLateral {
+    margin-right: 5px; /* espaciador para componentes laterales */
+	margin-left: 10px;
+}
+
+.espaciadorVertical{
+	margin-top: 10px;
+}
+
+#panelResultados{
+	height: 500px !important;
+	overflow: scroll;	
+}
+
+#contenido{
+	width: 95%;
+	margin: auto; 	
+}
+
+.table td{
+	vertical-align:middle !important;
+	text-align: center;
+}
+
+.table th{
+	vertical-align:middle !important;
+	text-align: center;
+}
