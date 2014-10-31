@@ -1,0 +1,11 @@
+<?php
+//////////////////////////////
+// post_visitas.php
+/////////////////////////////
+header('Content-type: application/json');
+include("config.php");
+
+$result['success'] = false;
+echo json_encode($result);
+exit();
+?>

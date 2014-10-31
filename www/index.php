@@ -9,10 +9,12 @@
     <!-- Bootstrap -->
 	
     <script src="js/j.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 	
     <link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/sysman.css" rel="stylesheet">
+    <link href="css/sysman.css" rel="stylesheet">
+
+   <!-- Scripts -->
 	<?php
       include("config.php");
        ?>
@@ -27,17 +29,20 @@
     <button onclick="$('#actualizarEquipo').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
     <div class="bootbox-body">
 
-     <h2>Modificar Equipo</h2><br>
+     <h2>Modificar Equipo #<span id="TitleActualizarEquipos"></span></h2><br>
      <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-8">
        <label>Nombre</label>
-       <input type="text" id="Nombre" name="Nombre" class="form-control" placeholder="Nombre">
+       <input type="text" id="nombreEquipo" name="Nombre" class="form-control" placeholder="Nombre">
+      </div>
+      <div class="col-md-4">
+       <img id="imgEquipo">
       </div>
      </div>
      <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
        <label>Descripción</label>
-       <textarea id="Descripcion" name="Descripcion" class="form-control" placeholder="Descripcion"></textarea>
+       <textarea id="descripcionEquipo" name="Descripcion" class="form-control" placeholder="Descripcion"></textarea>
       </div>
      </div>
 
@@ -63,7 +68,7 @@ width: 900px;
     <button onclick="$('#verUnidades').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
     <div class="bootbox-body">
 
-     <h2>Ver Unidades de Equipo</h2><br>
+     <h2>Ver Unidades de Equipo #<span id="TitleUnidadesEquipos"></span></h2><br>
      <div class="panel-body">
       <table class="table table-condensed table-hover">
        <thead>
@@ -76,14 +81,7 @@ width: 900px;
 	 <th>Acciones<th>
 	</tr>
        </thead>
-       <tbody>
-        <?php
-         $query = "SELECT * FROM EQUIPO ";
-         $output =  mysql_query($query) or die(mysql_error());
-         while ($lol =mysql_fetch_assoc($output)){
-          echo '<tr><td><img class="media-object" src="img/'.$lol["imagen_equipo"].'" alt="Impresora Canon" width="50px" height="50px"></td><td>'.$lol["id"].'</td><td>'.$lol["nombre"].'</td><td>'.$lol["descripcion"].'</td><td>25</td><td><button type="button" class="btn btn-default"  data-toggle="modal" data-target="#actualizarEquipo"><span class="glyphicon glyphicon-pencil"></span>Modificar Unidad</button> <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-search"></span>Ver Unidades de Equipo</button> <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle"></span>Eliminar Equipo</button></td></tr>';
-         }
-        ?>
+       <tbody id="tablaUnidadesEquipos">
        </tbody>
       </table>
      </div>
@@ -91,15 +89,11 @@ width: 900px;
     </div>
    </div>
    <div class="modal-footer">
-    <input type="button" onclick="$('#verUnidades').modal('hide');" class="btn btn-primary btn-lg" value="Actualizar">
     <input type="button" onclick="$('#verUnidades').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
    </div>
   </div>
  </div>
 </div>
-
-
-
     <!-- INICIO DE BARRA DE NAVEGACION -->
 	<nav class="navbar navbar-default" role="navigation">
 		<ul class="nav navbar-nav">
@@ -211,10 +205,17 @@ width: 900px;
 				</thead>
 				<tbody>
    <?php
+	   function countUnidades($id){
+	   $query = "SELECT COUNT(UE.ID) AS total FROM EQUIPO EQ, UNIDAD_EQUIPO UE WHERE EQ.ID = UE.equipo_id AND EQ.id = ".$id;
+	   $output = mysql_query($query) or die(mysql_error());
+	   $lol = mysql_fetch_assoc($output);
+	   return $lol['total'];	   
+	 }
 $query = "SELECT * FROM EQUIPO ";
   $output =  mysql_query($query) or die(mysql_error());
-while ($lol =mysql_fetch_assoc($output)){
-  echo '<tr><td><img class="media-object" src="img/'.$lol["imagen_equipo"].'" alt="Impresora Canon" width="50px" height="50px"></td><td>'.$lol["id"].'</td><td>'.$lol["nombre"].'</td><td>'.$lol["descripcion"].'</td><td>25</td><td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#actualizarEquipo"><span class="glyphicon glyphicon-pencil"></span>Modificar Unidad</button> <button type="button" class="btn btn-info" data-toggle="modal" data-target="#verUnidades"><span class="glyphicon glyphicon-search"></span>Ver Unidades de Equipo</button> <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle"></span>Eliminar Equipo</button></td></tr>';
+while ($lol = mysql_fetch_assoc($output)){
+  $UE = countUnidades($lol["id"]);
+  echo '<tr><td><img class="media-object" src="img/'.$lol["imagen_equipo"].'" alt="Impresora Canon" width="50px" height="50px"></td><td>'.$lol["id"].'</td><td>'.$lol["nombre"].'</td><td>'.$lol["descripcion"].'</td><td>'.$UE.'</td><td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#actualizarEquipo" onclick="actualizarEquipo('.$lol["id"].')"><span class="glyphicon glyphicon-pencil"></span>Modificar Unidad</button> <button type="button" class="btn btn-info" data-toggle="modal" data-target="#verUnidades" onclick="mostrarUnidadesEquipos('.$lol["id"].')"><span class="glyphicon glyphicon-search"></span>Ver Unidades de Equipo</button> <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle"></span>Eliminar Equipo</button></td></tr>';
 }
 ?>
 
@@ -224,5 +225,62 @@ while ($lol =mysql_fetch_assoc($output)){
 	</div>
 	</div>
 	</div>
+<!-- SCRIPTS -->
+<script>
+function actualizarEquipo(id){
+ var datos = {};
+ datos["EQ"] = id;
+ $.ajax({
+   url: "bah.php",
+       type: "post",
+       datatype:"json",
+       data: datos,
+       success: function(response){
+       if(response.success){
+	 $("span#TitleActualizarEquipos").html(id);
+	 console.log(response.nombre);
+	 delete response.success;
+	 $("textarea#descripcionEquipo").html(response["descripcion"]);
+	 $("img#imgEquipo").attr("src", "img/"+response["imagen_equipo"]);
+	 $("input#nombreEquipo").attr("value", response["nombre"]);
+       }else{
+	 console.log(response.success);
+	 console.log(response.msg);
+	 delete response.msg;
+	 delete response.success;
+       }
+     }
+   });
+}
+
+function mostrarUnidadesEquipos(id){
+ var datos = {};
+ datos["EQ"] = id;
+ $.ajax({
+   url: "search.php",
+       type: "post",
+       datatype:"json",
+       data: datos,
+       success: function(response){
+       if(response.success){
+	 delete response.success;
+	 var string = "";
+	 for (var key in response){
+	   string += "<tr><td>" + response[key]['id'] + "</td><td>" + response[key]['departamento_id'] + "</td><td>" + response[key]['ultimo_mantenimiento'] + "</td><td>" + response[key]['id'] + "</td><td>" + response[key]['estatus'] + "</td><td>" + response[key]['id']  + "x</td></tr>";
+	 }
+	 $("span#TitleUnidadesEquipos").html(id);
+	 $("tbody#tablaUnidadesEquipos").html(string);
+       }else{
+	 console.log(response.success);
+	 console.log(response.msg);
+	 delete response.msg;
+	 delete response.success;
+       }
+     }
+   });
+}
+</script>
+
+
   </body>
   </html>
