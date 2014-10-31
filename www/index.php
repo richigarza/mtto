@@ -30,6 +30,8 @@
     <div class="bootbox-body">
 
      <h2>Modificar Equipo #<span id="TitleActualizarEquipos"></span></h2><br>
+     <div id="successEditEquipo" style="display:none;">
+     </div>
      <div class="row">
       <div class="col-md-8">
        <label>Nombre</label>
@@ -49,8 +51,8 @@
     </div>
    </div>
    <div class="modal-footer">
-    <input type="button" onclick="$('#actualizarEquipo').modal('hide');" class="btn btn-primary btn-lg" value="Actualizar">
-    <input type="button" onclick="$('#actualizarEquipo').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
+    <input id="actualizarEquipo" type="button" class="btn btn-primary btn-lg" value="Actualizar">
+    <input type="button" onclick="$('div#successEditEquipo').hide();$('#actualizarEquipo').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
    </div>
   </div>
  </div>
@@ -215,7 +217,7 @@ $query = "SELECT * FROM EQUIPO ";
   $output =  mysql_query($query) or die(mysql_error());
 while ($lol = mysql_fetch_assoc($output)){
   $UE = countUnidades($lol["id"]);
-  echo '<tr><td><img class="media-object" src="img/'.$lol["imagen_equipo"].'" alt="Impresora Canon" width="50px" height="50px"></td><td>'.$lol["id"].'</td><td>'.$lol["nombre"].'</td><td>'.$lol["descripcion"].'</td><td>'.$UE.'</td><td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#actualizarEquipo" onclick="actualizarEquipo('.$lol["id"].')"><span class="glyphicon glyphicon-pencil"></span>Modificar Unidad</button> <button type="button" class="btn btn-info" data-toggle="modal" data-target="#verUnidades" onclick="mostrarUnidadesEquipos('.$lol["id"].')"><span class="glyphicon glyphicon-search"></span>Ver Unidades de Equipo</button> <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle"></span>Eliminar Equipo</button></td></tr>';
+  echo '<tr><td><img class="media-object" src="img/'.$lol["imagen_equipo"].'" alt="Impresora Canon" width="50px" height="50px"></td><td>'.$lol["id"].'</td><td>'.$lol["nombre"].'</td><td>'.$lol["descripcion"].'</td><td>'.$UE.'</td><td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#actualizarEquipo" onclick="cargarActualizarEquipo('.$lol["id"].')"><span class="glyphicon glyphicon-pencil"></span>Modificar Unidad</button> <button type="button" class="btn btn-info" data-toggle="modal" data-target="#verUnidades" onclick="mostrarUnidadesEquipos('.$lol["id"].')"><span class="glyphicon glyphicon-search"></span>Ver Unidades de Equipo</button> <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle"></span>Eliminar Equipo</button></td></tr>';
 }
 ?>
 
@@ -227,7 +229,36 @@ while ($lol = mysql_fetch_assoc($output)){
 	</div>
 <!-- SCRIPTS -->
 <script>
-function actualizarEquipo(id){
+$("input#actualizarEquipo").click(function(){
+    var datos = {};
+    datos['id'] = $("span#TitleActualizarEquipos").text();
+    datos['nombre'] = $("input#nombreEquipo").val();
+    datos['descripcion'] = $("textarea#descripcionEquipo").val();
+ $.ajax({
+   url: "bah.php",
+       type: "post",
+       datatype:"json",
+       data: datos,
+       success: function(response){
+       if(response.success){
+	 delete response.success;
+         $("div#successEditEquipo").html('<strong class="glyphicon glyphicon-ok-circle"></strong> Se modifico el equipo correctamente.');
+	 $("div#successEditEquipo").show();
+	 $("div#successEditEquipo").attr("class", "alert alert-success");
+       }else{
+	 console.log(response.success);
+	 console.log(response.msg);
+	 delete response.msg;
+	 delete response.success;
+         $("div#successEditEquipo").html('<strong class="glyphicon glyphicon-warning-sign"></strong> Ocurrio un Error al intentar modificar el equipo.')
+	 $("div#successEditEquipo").show();
+	 $("div#successEditEquipo").attr("class", "alert alert-danger");
+       }
+     }
+   });
+});
+
+function cargarActualizarEquipo(id){
  var datos = {};
  datos["EQ"] = id;
  $.ajax({
@@ -238,7 +269,6 @@ function actualizarEquipo(id){
        success: function(response){
        if(response.success){
 	 $("span#TitleActualizarEquipos").html(id);
-	 console.log(response.nombre);
 	 delete response.success;
 	 $("textarea#descripcionEquipo").html(response["descripcion"]);
 	 $("img#imgEquipo").attr("src", "img/"+response["imagen_equipo"]);
