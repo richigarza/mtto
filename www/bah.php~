@@ -1,0 +1,12 @@
+<?php
+header('Content-type: aplication/json');
+
+if (isset($_GET['EQ'])){
+  $result['success'] = true;
+}else{
+  $result['success'] = true;
+  $result['msg'] = "no";
+}
+echo json_encode($result);
+exit();
+?>

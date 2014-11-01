@@ -6,58 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
    <title>SYSMAN::.</title>
 
-    <!-- Bootstrap -->
-	
-    <script src="js/j.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	
+    <!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/sysman.css" rel="stylesheet">
-
-   <!-- Scripts -->
-	<?php
+ 
+    <?php
       include("config.php");
-       ?>
+    ?>
   </head>
   
   <body>
     <!-- MODALS  -->
-<div id="actualizarEquipo" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
- <div class="modal-dialog">
-  <div class="modal-content">
-   <div class="modal-body">
-    <button onclick="$('#actualizarEquipo').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
-    <div class="bootbox-body">
-
-     <h2>Modificar Equipo #<span id="TitleActualizarEquipos"></span></h2><br>
-     <div id="successEditEquipo" style="display:none;">
-     </div>
-     <div class="row">
-      <div class="col-md-8">
-       <label>Nombre</label>
-       <input type="text" id="nombreEquipo" name="Nombre" class="form-control" placeholder="Nombre">
-      </div>
-      <div class="col-md-4">
-       <img id="imgEquipo">
-      </div>
-     </div>
-     <div class="row">
-      <div class="col-md-12">
-       <label>Descripción</label>
-       <textarea id="descripcionEquipo" name="Descripcion" class="form-control" placeholder="Descripcion"></textarea>
-      </div>
-     </div>
-
-    </div>
-   </div>
-   <div class="modal-footer">
-    <input id="actualizarEquipo" type="button" class="btn btn-primary btn-lg" value="Actualizar">
-    <input type="button" onclick="$('div#successEditEquipo').hide();$('#actualizarEquipo').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
-   </div>
-  </div>
- </div>
-</div>
-
 <style>
 #verUnidades .modal-dialog{
 width: 900px;
@@ -96,6 +55,83 @@ width: 900px;
   </div>
  </div>
 </div>
+
+<div id="actualizarUnidad" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#actualizarUnidad').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+    <div class="bootbox-body">
+
+     <h2>Modificar Unidad #<span id="TitleActualizarUnidad"></span></h2><br>
+     <div id="successEditUnidad" style="display:none;">
+     </div>
+     <div class="row">
+      <div class="col-md-4">
+       <label>Ultimo Editor</label>
+       <input type="text" id="nombreUnidad" name="Nombre" class="form-control" placeholder="Nombre">
+      </div>
+      <div class="col-md-4">
+       <label>Estatus</label>
+       <select id="estatusUnidad" class="form-control"><option>I</option><option>A</option></select>
+      </div>
+      <div class="col-md-4">
+       <img id="imgUnidad">
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-12">
+       <label>Descripción</label>
+       <textarea id="descripcionUnidad" name="Descripcion" class="form-control" placeholder="Descripcion"></textarea>
+      </div>
+     </div>
+
+    </div>
+   </div>
+   <div class="modal-footer">
+    <input id="actualizarUnidad" type="button" class="btn btn-primary btn-lg" value="Actualizar">
+    <input type="button" onclick="$('div#successEditUnidad').hide();$('#actualizarUnidad').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
+   </div>
+  </div>
+ </div>
+</div>
+
+<div id="actualizarEquipo" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#actualizarEquipo').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+    <div class="bootbox-body">
+
+     <h2>Modificar Equipo #<span id="TitleActualizarEquipos"></span></h2><br>
+     <div id="successEditEquipo" style="display:none;">
+     </div>
+     <div class="row">
+      <div class="col-md-8">
+       <label>Nombre</label>
+       <input type="text" id="nombreEquipo" name="Nombre" class="form-control" placeholder="Nombre">
+      </div>
+      <div class="col-md-4">
+       <img id="imgEquipo">
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-12">
+       <label>Descripción</label>
+       <textarea id="descripcionEquipo" name="Descripcion" class="form-control" placeholder="Descripcion"></textarea>
+      </div>
+     </div>
+
+    </div>
+   </div>
+   <div class="modal-footer">
+    <input id="actualizarEquipo" type="button" class="btn btn-primary btn-lg" value="Actualizar">
+    <input type="button" onclick="$('div#successEditEquipo').hide();$('#actualizarEquipo').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
+   </div>
+  </div>
+ </div>
+</div>
+
     <!-- INICIO DE BARRA DE NAVEGACION -->
 	<nav class="navbar navbar-default" role="navigation">
 		<ul class="nav navbar-nav">
@@ -103,7 +139,7 @@ width: 900px;
 			
 			<li>
 				<div class="dropdown">
-					<button class="btn btn-default dropdown-toggle navbar-btn" type="button" id="departamentos" data-toggle="dropdown">
+					<button class="btn btn-default dropdown-toggle navbar-btn" type="button" id="departamentos" data-toggle="dropdown" onclick="window.location.assign('index.php?p=Departamentos')">
 						Departamentos
 						<span class="caret"></span>
 					</button>
@@ -116,7 +152,7 @@ width: 900px;
 			<li>
 			
 				<div class="dropdown">
-					<button class="btn btn-default dropdown-toggle navbar-btn" type="button" id="equipos" data-toggle="dropdown">
+					<button class="btn btn-default dropdown-toggle navbar-btn" type="button" id="equipos" data-toggle="dropdown" onclick="window.location.assign('index.php?p=Equipos')">
 						Equipos
 						<span class="caret"></span>
 					</button>
@@ -167,9 +203,11 @@ width: 900px;
 				</div>
 			</li>
 		</ul>
-	</nav> <!-- FIN DE LA BARRA DE NAVEGACION -->
-	
-	<div id="panelBusqueda" class="panel panel-default"> <!--PANEL DE BUSQUEDA-->
+	</nav> 
+<!-- FIN DE LA BARRA DE NAVEGACION -->
+
+                  <!--PANEL DE BUSQUEDA-->	
+	<div id="panelBusqueda" class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">Panel de Búsqueda</h3>
 		</div>
@@ -188,127 +226,38 @@ width: 900px;
 
 	<div id="contenido" class="panel panel-default espaciadorVertical">
 	<div class="panel-heading">
-			<h3 class="panel-title">Listado de Resultados</h3>
+	 <h3 class="panel-title">Listado de Resultados</h3>
 	</div>
 	<div class="panel-body">
 	<div id="panelResultados" class="panel panel-default espaciadorVertical"> <!--PANEL DE Resultados-->
 		<div class="panel-body">
-		
-			<table class="table table-condensed table-hover">
-				<thead>
-				<tr>
-					<th>Equipo</th>
-					<th>ID</th>
-					<th>Nombre</th>
-					<th>Descripcion</th>
-					<th>Total de Unidades</th>
-					<th>Acciones<th>
-				</tr>
-				</thead>
-				<tbody>
-   <?php
-	   function countUnidades($id){
-	   $query = "SELECT COUNT(UE.ID) AS total FROM EQUIPO EQ, UNIDAD_EQUIPO UE WHERE EQ.ID = UE.equipo_id AND EQ.id = ".$id;
-	   $output = mysql_query($query) or die(mysql_error());
-	   $lol = mysql_fetch_assoc($output);
-	   return $lol['total'];	   
-	 }
-$query = "SELECT * FROM EQUIPO ";
-  $output =  mysql_query($query) or die(mysql_error());
-while ($lol = mysql_fetch_assoc($output)){
-  $UE = countUnidades($lol["id"]);
-  echo '<tr><td><img class="media-object" src="img/'.$lol["imagen_equipo"].'" alt="Impresora Canon" width="50px" height="50px"></td><td>'.$lol["id"].'</td><td>'.$lol["nombre"].'</td><td>'.$lol["descripcion"].'</td><td>'.$UE.'</td><td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#actualizarEquipo" onclick="cargarActualizarEquipo('.$lol["id"].')"><span class="glyphicon glyphicon-pencil"></span>Modificar Unidad</button> <button type="button" class="btn btn-info" data-toggle="modal" data-target="#verUnidades" onclick="mostrarUnidadesEquipos('.$lol["id"].')"><span class="glyphicon glyphicon-search"></span>Ver Unidades de Equipo</button> <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle"></span>Eliminar Equipo</button></td></tr>';
-}
-?>
+    <?php
+     $page = $_GET['p'];
+     switch($page){
+     case "Equipos":
+       include("equipos.php");
+     break;
+     case "Departamentos":
+       include("departamentos.php");
+     break;
+     default:
 
-				</tbody>
-			</table>
+     }
+    ?>
 		</div>
 	</div>
 	</div>
 	</div>
+
 <!-- SCRIPTS -->
+    <!-- Bootstrap -->
+	
+    <script src="js/j.js"></script>	
+    <script src="js/bootstrap.min.js"></script>
+
+   <!-- SYSMAN -->
+    <script src="js/equipos.js"></script>
 <script>
-$("input#actualizarEquipo").click(function(){
-    var datos = {};
-    datos['id'] = $("span#TitleActualizarEquipos").text();
-    datos['nombre'] = $("input#nombreEquipo").val();
-    datos['descripcion'] = $("textarea#descripcionEquipo").val();
- $.ajax({
-   url: "bah.php",
-       type: "post",
-       datatype:"json",
-       data: datos,
-       success: function(response){
-       if(response.success){
-	 delete response.success;
-         $("div#successEditEquipo").html('<strong class="glyphicon glyphicon-ok-circle"></strong> Se modifico el equipo correctamente.');
-	 $("div#successEditEquipo").show();
-	 $("div#successEditEquipo").attr("class", "alert alert-success");
-       }else{
-	 console.log(response.success);
-	 console.log(response.msg);
-	 delete response.msg;
-	 delete response.success;
-         $("div#successEditEquipo").html('<strong class="glyphicon glyphicon-warning-sign"></strong> Ocurrio un Error al intentar modificar el equipo.')
-	 $("div#successEditEquipo").show();
-	 $("div#successEditEquipo").attr("class", "alert alert-danger");
-       }
-     }
-   });
-});
-
-function cargarActualizarEquipo(id){
- var datos = {};
- datos["EQ"] = id;
- $.ajax({
-   url: "bah.php",
-       type: "post",
-       datatype:"json",
-       data: datos,
-       success: function(response){
-       if(response.success){
-	 $("span#TitleActualizarEquipos").html(id);
-	 delete response.success;
-	 $("textarea#descripcionEquipo").html(response["descripcion"]);
-	 $("img#imgEquipo").attr("src", "img/"+response["imagen_equipo"]);
-	 $("input#nombreEquipo").attr("value", response["nombre"]);
-       }else{
-	 console.log(response.success);
-	 console.log(response.msg);
-	 delete response.msg;
-	 delete response.success;
-       }
-     }
-   });
-}
-
-function mostrarUnidadesEquipos(id){
- var datos = {};
- datos["EQ"] = id;
- $.ajax({
-   url: "search.php",
-       type: "post",
-       datatype:"json",
-       data: datos,
-       success: function(response){
-       if(response.success){
-	 delete response.success;
-	 var string = "";
-	 for (var key in response){
-	   string += "<tr><td>" + response[key]['id'] + "</td><td>" + response[key]['departamento_id'] + "</td><td>" + response[key]['ultimo_mantenimiento'] + "</td><td>" + response[key]['id'] + "</td><td>" + response[key]['estatus'] + "</td><td>" + response[key]['id']  + "x</td></tr>";
-	 }
-	 $("span#TitleUnidadesEquipos").html(id);
-	 $("tbody#tablaUnidadesEquipos").html(string);
-       }else{
-	 console.log(response.success);
-	 console.log(response.msg);
-	 delete response.msg;
-	 delete response.success;
-       }
-     }
-   });
-}
 </script>
 
 
