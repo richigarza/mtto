@@ -5,7 +5,7 @@ $("input#actualizarEquipo").click(function(){
     datos['descripcion'] = $("textarea#descripcionEquipo").val();
     datos['img'] = $("input#uploadImgEquipo")[0].files[0];
  $.ajax({
-   url: "php/EQ.php",
+   url: "bah.php",
        type: "post",
        datatype:"json",
        data: datos,
@@ -62,7 +62,7 @@ function cargarActualizarUnidad(id){
   var datos = {};
   datos['UE'] = id;
  $.ajax({
-   url: "php/UE.php",
+   url: "search.php",
        type: "post",
        datatype:"json",
        data: datos,
@@ -88,7 +88,7 @@ function cargarActualizarEquipo(id){
  var datos = {};
  datos["EQ"] = id;
  $.ajax({
-   url: "php/EQ.php",
+   url: "bah.php",
        type: "post",
        datatype:"json",
        data: datos,
@@ -113,7 +113,7 @@ function mostrarUnidadesEquipos(id){
  var datos = {};
  datos["EQ"] = id;
  $.ajax({
-   url: "php/UE.php",
+   url: "search.php",
        type: "post",
        datatype:"json",
        data: datos,

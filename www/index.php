@@ -113,6 +113,7 @@ width: 900px;
       </div>
       <div class="col-md-4">
        <img id="imgEquipo">
+        <input type="file" id="uploadImgEquipo">
       </div>
      </div>
      <div class="row">
@@ -254,9 +255,10 @@ width: 900px;
 	
     <script src="js/j.js"></script>	
     <script src="js/bootstrap.min.js"></script>
-
+    <script src="http://malsup.github.com/min/jquery.form.min.js"></script>
    <!-- SYSMAN -->
     <script src="js/equipos.js"></script>
+
 <script>
 </script>
 
