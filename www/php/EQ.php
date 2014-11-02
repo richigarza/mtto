@@ -1,6 +1,6 @@
 <?php
-header('Content-type: aplication/json');
-include("config.php");
+header('Content-type: application/json');
+include("../config.php");
 
 if (isset($_POST['EQ'])){
   $query = 'SELECT * FROM EQUIPO WHERE id="'.$_POST["EQ"].'"';

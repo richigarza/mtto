@@ -9,134 +9,24 @@
     <!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/sysman.css" rel="stylesheet">
- 
-    <?php
-      include("config.php");
-    ?>
-  </head>
-  
-  <body>
-    <!-- MODALS  -->
 <style>
 #verUnidades .modal-dialog{
 width: 900px;
 }
 </style>
-<div id="verUnidades" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
- <div class="modal-dialog">
-  <div class="modal-content">
-   <div class="modal-body">
-    <button onclick="$('#verUnidades').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
-    <div class="bootbox-body">
-
-     <h2>Ver Unidades de Equipo #<span id="TitleUnidadesEquipos"></span></h2><br>
-     <div class="panel-body">
-      <table class="table table-condensed table-hover">
-       <thead>
-        <tr>
-	 <th>ID Unidad</th>
-	 <th>Departamento</th>
-	 <th>Ultimo Mtto.</th>
-	 <th>Siguiente Prog.</th>
-	 <th>Estado</th>
-	 <th>Acciones<th>
-	</tr>
-       </thead>
-       <tbody id="tablaUnidadesEquipos">
-       </tbody>
-      </table>
-     </div>
-
-    </div>
-   </div>
-   <div class="modal-footer">
-    <input type="button" onclick="$('#verUnidades').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
-   </div>
-  </div>
- </div>
-</div>
-
-<div id="actualizarUnidad" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
- <div class="modal-dialog">
-  <div class="modal-content">
-   <div class="modal-body">
-    <button onclick="$('#actualizarUnidad').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
-    <div class="bootbox-body">
-
-     <h2>Modificar Unidad #<span id="TitleActualizarUnidad"></span></h2><br>
-     <div id="successEditUnidad" style="display:none;">
-     </div>
-     <div class="row">
-      <div class="col-md-4">
-       <label>Ultimo Editor</label>
-       <input type="text" id="nombreUnidad" name="Nombre" class="form-control" placeholder="Nombre">
-      </div>
-      <div class="col-md-4">
-       <label>Estatus</label>
-       <select id="estatusUnidad" class="form-control"><option>I</option><option>A</option></select>
-      </div>
-      <div class="col-md-4">
-       <img id="imgUnidad">
-      </div>
-     </div>
-     <div class="row">
-      <div class="col-md-12">
-       <label>Descripción</label>
-       <textarea id="descripcionUnidad" name="Descripcion" class="form-control" placeholder="Descripcion"></textarea>
-      </div>
-     </div>
-
-    </div>
-   </div>
-   <div class="modal-footer">
-    <input id="actualizarUnidad" type="button" class="btn btn-primary btn-lg" value="Actualizar">
-    <input type="button" onclick="$('div#successEditUnidad').hide();$('#actualizarUnidad').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
-   </div>
-  </div>
- </div>
-</div>
-
-<div id="actualizarEquipo" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
- <div class="modal-dialog">
-  <div class="modal-content">
-   <div class="modal-body">
-    <button onclick="$('#actualizarEquipo').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
-    <div class="bootbox-body">
-
-     <h2>Modificar Equipo #<span id="TitleActualizarEquipos"></span></h2><br>
-     <div id="successEditEquipo" style="display:none;">
-     </div>
-     <div class="row">
-      <div class="col-md-8">
-       <label>Nombre</label>
-       <input type="text" id="nombreEquipo" name="Nombre" class="form-control" placeholder="Nombre">
-      </div>
-      <div class="col-md-4">
-       <img id="imgEquipo">
-        <input type="file" id="uploadImgEquipo">
-      </div>
-     </div>
-     <div class="row">
-      <div class="col-md-12">
-       <label>Descripción</label>
-       <textarea id="descripcionEquipo" name="Descripcion" class="form-control" placeholder="Descripcion"></textarea>
-      </div>
-     </div>
-
-    </div>
-   </div>
-   <div class="modal-footer">
-    <input id="actualizarEquipo" type="button" class="btn btn-primary btn-lg" value="Actualizar">
-    <input type="button" onclick="$('div#successEditEquipo').hide();$('#actualizarEquipo').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
-   </div>
-  </div>
- </div>
-</div>
+ 
+  </head>
+  <?php 
+      include("config.php");
+      include("modals.php");
+  if (isset($_SESSION['username'])) {
+  ?>
+  <body>
 
     <!-- INICIO DE BARRA DE NAVEGACION -->
 	<nav class="navbar navbar-default" role="navigation">
 		<ul class="nav navbar-nav">
-			<li><a href="#">SYSMAN</a></li>
+      <li><a href="#">SYSMAN | <?php echo $_SESSION['username']; ?></a> </li>
 			
 			<li>
 				<div class="dropdown">
@@ -153,12 +43,12 @@ width: 900px;
 			<li>
 			
 				<div class="dropdown">
-					<button class="btn btn-default dropdown-toggle navbar-btn" type="button" id="equipos" data-toggle="dropdown" onclick="window.location.assign('index.php?p=Equipos')">
+					<button class="btn btn-default dropdown-toggle navbar-btn" type="button" id="equipos" data-toggle="dropdown">
 						Equipos
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="equipos">
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Inventario de Equipos</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#"  onclick="window.location.assign('index.php?p=Equipos')">Inventario de Equipos</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Inventario de Refacciones</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Inventario de Herramientas</a></li>
 					</ul>
@@ -201,6 +91,13 @@ width: 900px;
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Reportes</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Indicadores</a></li>
 					</ul>
+				</div>
+			</li>
+			<li>
+				<div class="dropdown">
+					<button class="btn btn-default dropdown-toggle navbar-btn" type="button" id="odt" data-toggle="dropdown" onclick="window.location.assign('php/logout.php')">
+						Salir
+					</button>
 				</div>
 			</li>
 		</ul>
@@ -248,6 +145,9 @@ width: 900px;
 		</div>
 	</div>
 	</div>
+		   <div class="col-md-12" style="padding-top:50px;">
+		   <span class="pull-right">&#169; 2014. Todos los derechos reservados. SYSMAN </span>
+		   </div>
 	</div>
 
 <!-- SCRIPTS -->
@@ -264,4 +164,9 @@ width: 900px;
 
 
   </body>
+  <?php 
+       }else{
+	  include("login.php");
+	}
+?>
   </html>

@@ -3,7 +3,7 @@
 // search.php
 /////////////////////////////
 header('Content-type: application/json');
-include("config.php");
+include("../config.php");
 
 if (isset($_POST["EQ"])){
 	 $result['success'] = true;
