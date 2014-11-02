@@ -109,6 +109,40 @@
  </div>
 </div>
 
+<div id="nuevoEquipoModal" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#nuevoEquipoModal').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+    <div class="bootbox-body">
+     <h2>Equipo Nuevo</h2><br>
+     <div id="successAddEquipo" style="display:none;"></div>
+     <div class="row">
+      <div class="col-md-8">
+       <label>Nombre</label>
+       <input type="text" id="nombreEquipoNuevo" name="Nombre" class="form-control" placeholder="Nombre">
+      </div>
+      <div class="col-md-4">
+        <input type="file" id="uploadImgEquipoNuevo">
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-12">
+       <label>Descripción</label>
+       <textarea id="descripcionEquipoNuevo" name="Descripcion" class="form-control" placeholder="Descripcion"></textarea>
+      </div>
+     </div>
+
+    </div>
+   </div>
+   <div class="modal-footer">
+    <button id="nuevoEquipo" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Nuevo</button>
+    <input type="button" onclick="$('div#successAddEquipo').hide();$('#nuevoEquipoModal').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
+   </div>
+  </div>
+ </div>
+</div>
+
 <!-- Departamento -->   
 <div id="actualizarDepartamento" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
  <div class="modal-dialog">
@@ -142,3 +176,34 @@
  </div>
 </div>
 
+
+<div id="nuevoDepartamentoModal" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#nuevoDepartamentoModal').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+    <div class="bootbox-body">
+     <h2>Departamento Nuevo</h2><br>
+     <div id="successAddDepartamento" style="display:none;"></div>
+     <div class="row">
+      <div class="col-md-12">
+       <label>Nombre</label>
+       <input type="text" id="nombreDepartamentoNuevo" name="Nombre" class="form-control" placeholder="Nombre">
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-12">
+       <label>Ubicación</label>
+       <input type="text" id="ubicacionDepartamentoNuevo" name="Ubicacion" class="form-control" placeholder="Ubicacion">
+      </div>
+     </div>
+
+    </div>
+   </div>
+   <div class="modal-footer">
+    <button id="nuevoDepartamento" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Nuevo</button>
+    <input type="button" onclick="$('div#successAddDepartamento').hide();$('#nuevoDepartamentoModal').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
+   </div>
+  </div>
+ </div>
+</div>

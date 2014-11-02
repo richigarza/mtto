@@ -1,8 +1,43 @@
+$("button#nuevoEquipo").click(function(){
+    var datos = {};
+    datos['nuevo'] = 1;
+    datos['nombre'] = $("input#nombreEquipoNuevo").val();
+    datos['descripcion'] = $("textarea#descripcionEquipoNuevo").val();
+    datos['editor'] = $('span#username').text();
+ $.ajax({
+   url: "php/EQ.php",
+       type: "post",
+       datatype:"json",
+       data: datos,
+       success: function(response){
+       if(response.success){
+	 console.log(response);
+	 delete response.success;
+	 cargarActualizarEquipo(response['id']);
+	 $('#nuevoEquipoModal').modal('hide');
+	 $('#actualizarEquipo').modal('show');
+         $("div#successEditEquipo").html('<strong class="glyphicon glyphicon-ok-circle"></strong> Se agrego el equipo correctamente.');
+	 $("div#successEditEquipo").show();
+	 $("div#successEditEquipo").attr("class", "alert alert-success");
+       }else{
+	 console.log(response.success);
+	 console.log(response.msg);
+	 delete response.msg;
+	 delete response.success;
+         $("div#successAddEquipo").html('<strong class="glyphicon glyphicon-warning-sign"></strong> Ocurrio un Error al intentar agregar el equipo.')
+	 $("div#successAddEquipo").show();
+	 $("div#successAddEquipo").attr("class", "alert alert-danger");
+       }
+     }
+   });
+});
+
 $("input#actualizarEquipo").click(function(){
     var datos = {};
     datos['id'] = $("span#TitleActualizarEquipos").text();
     datos['nombre'] = $("input#nombreEquipo").val();
     datos['descripcion'] = $("textarea#descripcionEquipo").val();
+    datos['editor'] = $('span#username').text();
     datos['img'] = $("input#uploadImgEquipo")[0].files[0];
  $.ajax({
    url: "php/EQ.php",

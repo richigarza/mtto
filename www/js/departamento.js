@@ -1,3 +1,36 @@
+$("button#nuevoDepartamento").click(function(){
+    var datos = {};
+    datos['nuevo'] = 1;
+    datos['nombre'] = $("input#nombreDepartamentoNuevo").val();
+    datos['ubicacion'] = $("input#ubicacionDepartamentoNuevo").val();
+    datos['editor'] = $('span#username').text();
+ $.ajax({
+   url: "php/DP.php",
+       type: "post",
+       datatype:"json",
+       data: datos,
+       success: function(response){
+       if(response.success){
+	 delete response.success;
+	 cargarActualizarDepartamento(response['id']);
+	 $('#nuevoDepartamentoModal').modal('hide');
+	 $('#actualizarDepartamento').modal('show');
+         $("div#successEditDepartamento").html('<strong class="glyphicon glyphicon-ok-circle"></strong> Se agrego el Departamento correctamente.');
+	 $("div#successEditDepartamento").show();
+	 $("div#successEditDepartamento").attr("class", "alert alert-success");
+       }else{
+	 console.log(response.success);
+	 console.log(response.msg);
+	 delete response.msg;
+	 delete response.success;
+         $("div#successAddDepartamento").html('<strong class="glyphicon glyphicon-warning-sign"></strong> Ocurrio un Error al intentar agregar el Departamento.')
+	 $("div#successAddDepartamento").show();
+	 $("div#successAddDepartamento").attr("class", "alert alert-danger");
+       }
+     }
+   });
+});
+
 $("input#actualizarDepartamento").click(function(){
     var datos = {};
     datos['id'] = $("span#TitleActualizarDepartamento").text();

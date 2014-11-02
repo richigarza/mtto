@@ -10,6 +10,12 @@ if (isset($_POST['EQ'])){
   $output = mysql_query($query) or die(mysql_error());
   $result = mysql_fetch_assoc($output);
   $result['success'] = true;
+}else if (isset($_POST['nuevo'])){
+  $query = 'INSERT INTO EQUIPO (nombre, descripcion, imagen_equipo, estatus, ultima_fecha_actualizacion, ultimo_editor) VALUES("'.$_POST["nombre"].'","'.$_POST["descripcion"].'","impresora.jpeg","A","'.date("Y-m-d H:i:s").'","'.$_POST["editor"].'")';
+  mysql_query($query) or die(mysql_error());
+  $result['success'] = true;
+  $result['id'] = mysql_insert_id();
+	  
 }else if (isset($_POST['id'])){
   $max=1500000; 
   $filesize = $_FILES['img']['size'];
@@ -21,7 +27,7 @@ if (isset($_POST['EQ'])){
 	$uploadfile = "img/" . $filename;
 	if (move_uploaded_file($_FILES['upfile']['tmp_name'], $uploadfile)) {
 
-	  $query = 'UPDATE EQUIPO SET nombre="'.$_POST["nombre"].'", descripcion="'.$_POST["descripcion"].'" WHERE id="'.$_POST["id"].'"';
+	  $query = 'UPDATE EQUIPO SET nombre="'.$_POST["nombre"].'", descripcion="'.$_POST["descripcion"].'", ultima_fecha_actualizacion="'.date("Y-m-d H:i:s").'", ultimo_editor="'.$_POST["editor"].'" WHERE id="'.$_POST["id"].'"';
 	  mysql_query($query) or die(mysql_error());
 	  $result['success'] = true;
 

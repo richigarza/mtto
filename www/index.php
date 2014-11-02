@@ -20,6 +20,7 @@ width: 900px;
       include("config.php");
       include("modals.php");
   if (isset($_SESSION['username'])) {
+     $page = $_GET['p'];
   ?>
   <body>
 
@@ -49,8 +50,8 @@ width: 900px;
 					</button>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="equipos">
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="#"  onclick="window.location.assign('index.php?p=Equipos')">Inventario de Equipos</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Inventario de Refacciones</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Inventario de Herramientas</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="window.location.assign('index.php?p=Refacciones')">Inventario de Refacciones</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="window.location.assign('index.php?p=Herramientas')">Inventario de Herramientas</a></li>
 					</ul>
 				</div>
 			
@@ -124,16 +125,21 @@ width: 900px;
 
 	<div id="contenido" class="panel panel-default espaciadorVertical">
 	<div class="panel-heading">
-	 <h3 class="panel-title">Listado de Resultados</h3>
+											   <h3 class="panel-title"><?php echo $page; ?> - Listado de Resultados</h3>
 	</div>
 	<div class="panel-body">
 	<div id="panelResultados" class="panel panel-default espaciadorVertical"> <!--PANEL DE Resultados-->
 		<div class="panel-body">
     <?php
-     $page = $_GET['p'];
      switch($page){
      case "Equipos":
        include("equipos.php");
+     break;
+     case "Refacciones":
+       include("refaccion.php");
+     break;
+     case "Herramientas":
+       include("herramienta.php");
      break;
      case "Departamentos":
        include("departamentos.php");

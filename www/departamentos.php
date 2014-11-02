@@ -1,3 +1,4 @@
+<button class="btn btn-success" data-toggle="modal" data-target="#nuevoDepartamentoModal"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Nuevo</button>
 <table class="table table-condensed table-hover">
  <thead>
   <tr>
