@@ -1,0 +1,23 @@
+function cargarActualizarDepartamento(id){
+ var datos = {};
+ datos["DP"] = id;
+ $.ajax({
+   url: "php/DP.php",
+       type: "post",
+       datatype:"json",
+       data: datos,
+       success: function(response){
+       if(response.success){
+	 $("span#TitleActualizarDepartamento").html(id);
+	 delete response.success;
+	 $("textarea#descripcionDepartamento").html(response["descripcion"]);
+	 $("input#nombreDepartamento").attr("value", response["nombre"]);
+       }else{
+	 console.log(response.success);
+	 console.log(response.msg);
+	 delete response.msg;
+	 delete response.success;
+       }
+     }
+   });
+}

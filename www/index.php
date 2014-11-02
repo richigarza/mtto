@@ -26,7 +26,7 @@ width: 900px;
     <!-- INICIO DE BARRA DE NAVEGACION -->
 	<nav class="navbar navbar-default" role="navigation">
 		<ul class="nav navbar-nav">
-      <li><a href="#">SYSMAN | <?php echo $_SESSION['username']; ?></a> </li>
+      <li><a href="#">SYSMAN | <span id="username"><?php echo $_SESSION['username']; ?></span></a> </li>
 			
 			<li>
 				<div class="dropdown">
@@ -155,9 +155,9 @@ width: 900px;
 	
     <script src="js/j.js"></script>	
     <script src="js/bootstrap.min.js"></script>
-    <script src="http://malsup.github.com/min/jquery.form.min.js"></script>
    <!-- SYSMAN -->
     <script src="js/equipos.js"></script>
+    <script src="js/departamento.js"></script>
 
 <script>
 </script>

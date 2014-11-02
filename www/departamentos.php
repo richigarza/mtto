@@ -20,7 +20,7 @@
    $output =  mysql_query($query) or die(mysql_error());
    while ($lol = mysql_fetch_assoc($output)){
     $UE = countUnidades($lol["id"]);
-    echo '<tr><td>'.$lol["id"].'</td><td>'.$lol["nombre"].'</td><td>'.$lol["ubicacion"].'</td><td>'.$UE.'</td><td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#actualizarEquipo" onclick="cargarActualizarEquipo('.$lol["id"].')"><span class="glyphicon glyphicon-pencil"></span>Modificar Departamento</button> <button type="button" class="btn btn-info" data-toggle="modal" data-target="#verUnidades" onclick="mostrarUnidadesEquipos('.$lol["id"].')"><span class="glyphicon glyphicon-search"></span>Ver Unidades de Equipo</button> <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle"></span>Eliminar Equipo</button></td></tr>';
+    echo '<tr><td>'.$lol["id"].'</td><td>'.$lol["nombre"].'</td><td>'.$lol["ubicacion"].'</td><td>'.$UE.'</td><td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#actualizarDepartamento" onclick="cargarActualizarDepartamento('.$lol["id"].')"><span class="glyphicon glyphicon-pencil"></span>Modificar Departamento</button> </td></tr>';
    }
   ?>
  </tbody>

@@ -108,37 +108,3 @@
   </div>
  </div>
 </div>
-
-<!-- Departamento -->   
-<div id="actualizarDepartamento" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
- <div class="modal-dialog">
-  <div class="modal-content">
-   <div class="modal-body">
-    <button onclick="$('#actualizarDepartamento').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
-    <div class="bootbox-body">
-     <h2>Modificar Departamento #<span id="TitleActualizarDepartamento"></span></h2><br>
-     <div id="successEditEquipo" style="display:none;">
-     </div>
-     <div class="row">
-      <div class="col-md-12">
-       <label>Nombre</label>
-       <input type="text" id="nombreDepartamento" name="Nombre" class="form-control" placeholder="Nombre">
-      </div>
-     </div>
-     <div class="row">
-      <div class="col-md-12">
-       <label>Ubicación</label>
-       <input type="text" id="ubicacionDepartamento" name="Ubicacion" class="form-control" placeholder="Ubicacion">
-      </div>
-     </div>
-
-    </div>
-   </div>
-   <div class="modal-footer">
-    <input id="actualizarDepartamento" type="button" class="btn btn-primary btn-lg" value="Actualizar">
-    <input type="button" onclick="$('div#successEditDepartamento').hide();$('#actualizarDepartamento').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
-   </div>
-  </div>
- </div>
-</div>
-

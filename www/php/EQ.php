@@ -1,4 +1,7 @@
 <?php
+/////////////////////////////
+// EQ.php
+////////////////////////////
 header('Content-type: application/json');
 include("../config.php");
 
@@ -22,7 +25,7 @@ if (isset($_POST['EQ'])){
 	  mysql_query($query) or die(mysql_error());
 	  $result['success'] = true;
 
-	  $result['msg'] = 'Archivo subido correctamente';
+	  $result['msg'] = 'Archivo cargado correctamente';
 	} else {
 	  $result['msg'] = "Error de conexión con el servidor.";
 	  $result['success'] = false;
