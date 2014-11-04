@@ -59,7 +59,7 @@ width: 900px;
 			
 			<li>
 				<div class="dropdown">
-					<button class="btn btn-default dropdown-toggle navbar-btn" type="button" id="personal" data-toggle="dropdown">
+					<button class="btn btn-default dropdown-toggle navbar-btn" type="button" id="personal" data-toggle="dropdown" onclick="window.location.assign('index.php?p=Personal')">
 						Personal
 						<span class="caret"></span>
 					</button>
@@ -138,6 +138,9 @@ width: 900px;
      case "Refacciones":
        include("refaccion.php");
      break;
+     case "Personal":
+       include("personal.php");
+     break;
      case "Herramientas":
        include("herramienta.php");
      break;
@@ -164,6 +167,8 @@ width: 900px;
    <!-- SYSMAN -->
     <script src="js/equipos.js"></script>
     <script src="js/departamento.js"></script>
+    <script src="js/refaccion.js"></script>
+    <script src="js/herramienta.js"></script>
 
 <script>
 </script>

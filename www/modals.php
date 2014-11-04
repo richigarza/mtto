@@ -1,3 +1,4 @@
+<!-- Unidades -->
 <div id="verUnidades" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
  <div class="modal-dialog">
   <div class="modal-content">
@@ -72,6 +73,7 @@
  </div>
 </div>
 
+<!-- Equipo -->
 <div id="actualizarEquipo" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
  <div class="modal-dialog">
   <div class="modal-content">
@@ -203,6 +205,193 @@
    <div class="modal-footer">
     <button id="nuevoDepartamento" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Nuevo</button>
     <input type="button" onclick="$('div#successAddDepartamento').hide();$('#nuevoDepartamentoModal').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- REFACCION -->   
+<div id="actualizarRefaccion" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#actualizarRefaccion').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+    <div class="bootbox-body">
+     <h2>Modificar Refaccion #<span id="TitleActualizarRefaccion"></span></h2><br>
+     <div id="successEditRefaccion" style="display:none;">
+     </div>
+     <div class="row">
+      <div class="col-md-8">
+       <label>Nombre</label>
+       <input type="text" id="nombreRefaccion" name="Nombre" class="form-control" placeholder="Nombre">
+      </div>
+      <div class="col-md-4">
+       <label>Equipo</label>
+       <select id="equipo_idRefaccion">
+       <?php 
+         $output = mysql_query("SELECT id, nombre FROM EQUIPO") or die(mysql_error());
+         while ($lista = mysql_fetch_assoc($output)){
+          echo '<option value="'.$lista["id"].'">'.$lista["nombre"].'</option>';
+         }
+       ?>
+       </select>
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-12">
+       <label>Descripción</label>
+       <textarea id="descripcionRefaccion" name="descripcion" class="form-control" placeholder="Descripcion"></textarea>
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-4">
+       <label>Costo</label>
+       <input type="text" id="costo_refaccionRefaccion" name="costo" class="form-control" placeholder="Costo">
+      </div>
+      <div class="col-md-4">
+       <label>Unidades Disponibles</label>
+       <input type="text" id="unidades_disponiblesRefaccion" name="unidadesdisponibles" class="form-control" placeholder="Unidades Disponibles">
+      </div>
+      <div class="col-md-4">
+       <label>Unidades por Equipo</label>
+       <input type="text" id="unidades_por_equipoRefaccion" name="unidadesporequipo" class="form-control" placeholder="Unidades por Equipo">
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="modal-footer">
+    <input id="actualizarRefaccion" type="button" class="btn btn-primary btn-lg" value="Actualizar">
+    <input type="button" onclick="$('div#successEditRefaccion').hide();$('#actualizarRefaccion').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
+   </div>
+  </div>
+ </div>
+</div>
+
+
+<div id="nuevoRefaccionModal" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#nuevoRefaccionModal').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+    <div class="bootbox-body">
+     <h2>Refaccion Nueva</h2><br>
+     <div id="successAddRefaccion" style="display:none;"></div>
+
+     <div class="row">
+      <div class="col-md-8">
+       <label>Nombre</label>
+       <input type="text" id="nombreRefaccionNuevo" name="Nombre" class="form-control" placeholder="Nombre">
+      </div>
+      <div class="col-md-4">
+       <label>Equipo</label>
+       <select id="equipo_idRefaccionNuevo">
+       <?php 
+         $output = mysql_query("SELECT id, nombre FROM EQUIPO") or die(mysql_error());
+         while ($lista = mysql_fetch_assoc($output)){
+          echo '<option value="'.$lista["id"].'">'.$lista["nombre"].'</option>';
+         }
+       ?>
+       </select>
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-12">
+       <label>Descripción</label>
+       <textarea id="descripcionRefaccionNuevo" name="descripcion" class="form-control" placeholder="Descripcion"></textarea>
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-4">
+       <label>Costo</label>
+       <input type="text" id="costo_refaccionRefaccionNuevo" name="costo" class="form-control" placeholder="Costo">
+      </div>
+      <div class="col-md-4">
+       <label>Unidades Disponibles</label>
+       <input type="text" id="unidades_disponiblesRefaccionNuevo" name="unidadesdisponibles" class="form-control" placeholder="Unidades Disponibles">
+      </div>
+      <div class="col-md-4">
+       <label>Unidades por Equipo</label>
+       <input type="text" id="unidades_por_equipoRefaccionNuevo" name="unidadesporquipo" class="form-control" placeholder="Unidades por Equipo">
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="modal-footer">
+    <button id="nuevoRefaccion" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Nuevo</button>
+    <input type="button" onclick="$('div#successAddRefaccion').hide();$('#nuevoRefaccionModal').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- Herramienta -->
+<div id="actualizarHerramienta" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#actualizarHerramienta').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+    <div class="bootbox-body">
+
+     <h2>Modificar Herramienta #<span id="TitleActualizarHerramienta"></span></h2><br>
+     <div id="successEditHerramienta" style="display:none;">
+     </div>
+     <div class="row">
+      <div class="col-md-8">
+       <label>Nombre</label>
+       <input type="text" id="nombreHerramienta" name="Nombre" class="form-control" placeholder="Nombre">
+      </div>
+      <div class="col-md-4">
+       <label>Numero Unidades</label>
+       <input type="text" id="unidades_disponiblesHerramienta" name="unidades_disponibles" class="form-control" placeholder="Número de unidades">
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-12">
+       <label>Descripción</label>
+       <textarea id="descripcionHerramienta" name="Descripcion" class="form-control" placeholder="Descripcion"></textarea>
+      </div>
+     </div>
+
+    </div>
+   </div>
+   <div class="modal-footer">
+    <input id="actualizarHerramienta" type="button" class="btn btn-primary btn-lg" value="Actualizar">
+    <input type="button" onclick="$('div#successEditHerramienta').hide();$('#actualizarHerramienta').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
+   </div>
+  </div>
+ </div>
+</div>
+
+<div id="nuevoHerramientaModal" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#nuevoHerramientaModal').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+    <div class="bootbox-body">
+     <h2>Herramienta Nueva</h2><br>
+     <div id="successAddHerramienta" style="display:none;"></div>
+     <div class="row">
+      <div class="col-md-8">
+       <label>Nombre</label>
+       <input type="text" id="nombreHerramientaNuevo" name="Nombre" class="form-control" placeholder="Nombre">
+      </div>
+      <div class="col-md-4">
+       <label>Numero Unidades</label>
+       <input type="text" id="unidades_disponiblesHerramientaNuevo" name="unidades_disponibles" class="form-control" placeholder="Número de unidades">
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-12">
+       <label>Descripción</label>
+       <textarea id="descripcionHerramientaNuevo" name="Descripcion" class="form-control" placeholder="Descripcion"></textarea>
+      </div>
+     </div>
+
+    </div>
+   </div>
+   <div class="modal-footer">
+    <button id="nuevoHerramienta" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Nuevo</button>
+    <input type="button" onclick="$('div#successAddHerramienta').hide();$('#nuevoHerramientaModal').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
    </div>
   </div>
  </div>

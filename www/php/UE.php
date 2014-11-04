@@ -1,6 +1,6 @@
 <?php
 /////////////////////////////
-// search.php
+// UE.php
 /////////////////////////////
 header('Content-type: application/json');
 include("../config.php");
