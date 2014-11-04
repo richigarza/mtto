@@ -94,7 +94,7 @@ CREATE TABLE SYSMAN.UNIDAD_EQUIPO(
   descripcion varchar(255) COMMENT "Descripcion o comentarios de la unidad",
   ultimo_mantenimiento TIMESTAMP COMMENT "Ultimo mantenimiento a la unidad",
   estatus varchar(1) NOT NULL DEFAULT "A" COMMENT "Estatus del Registro. A - Activo / I - Inactivo.",
-  ultima_fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT "Última Fecha de actualización del registro.",
+  ultima_fecha_actualizacion TIMESTAMP DEFAULT '0000-00-00 00:00:00' COMMENT "Última Fecha de actualización del registro.",
   ultimo_editor varchar(100) NOT NULL COMMENT "Ultima persona que edito el registro",
   
   KEY UNIDAD_EQUIPO_EQUIPO_KEY (equipo_id),
