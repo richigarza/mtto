@@ -169,6 +169,7 @@ width: 900px;
     <script src="js/departamento.js"></script>
     <script src="js/refaccion.js"></script>
     <script src="js/herramienta.js"></script>
+    <script src="js/personal.js"></script>
 
 <script>
 </script>

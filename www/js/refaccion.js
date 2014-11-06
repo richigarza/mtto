@@ -71,7 +71,7 @@ $("input#actualizarRefaccion").click(function(){
 
 function cargarActualizarRefaccion(id){
  var datos = {};
- datos["DP"] = id;
+ datos["RF"] = id;
  $.ajax({
    url: "php/RF.php",
        type: "post",

@@ -91,7 +91,7 @@
       </div>
       <div class="col-md-4">
        <img id="imgEquipo">
-        <input type="file" id="uploadImgEquipo">
+        <input type="file" id="uploadImgEquipo" class="form-control"> 
       </div>
      </div>
      <div class="row">
@@ -125,7 +125,7 @@
        <input type="text" id="nombreEquipoNuevo" name="Nombre" class="form-control" placeholder="Nombre">
       </div>
       <div class="col-md-4">
-        <input type="file" id="uploadImgEquipoNuevo">
+        <input type="file" id="uploadImgEquipoNuevo" class="form-control">
       </div>
      </div>
      <div class="row">
@@ -227,7 +227,7 @@
       </div>
       <div class="col-md-4">
        <label>Equipo</label>
-       <select id="equipo_idRefaccion">
+       <select id="equipo_idRefaccion" class="form-control">
        <?php 
          $output = mysql_query("SELECT id, nombre FROM EQUIPO") or die(mysql_error());
          while ($lista = mysql_fetch_assoc($output)){
@@ -284,7 +284,7 @@
       </div>
       <div class="col-md-4">
        <label>Equipo</label>
-       <select id="equipo_idRefaccionNuevo">
+       <select id="equipo_idRefaccionNuevo" class="form-control">
        <?php 
          $output = mysql_query("SELECT id, nombre FROM EQUIPO") or die(mysql_error());
          while ($lista = mysql_fetch_assoc($output)){
@@ -392,6 +392,101 @@
    <div class="modal-footer">
     <button id="nuevoHerramienta" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Nuevo</button>
     <input type="button" onclick="$('div#successAddHerramienta').hide();$('#nuevoHerramientaModal').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- USUARIOS -->
+<div id="actualizarUsuario" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#actualizarUsuario').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+    <div class="bootbox-body">
+
+     <h2>Modificar Usuario #<span id="TitleActualizarUsuario"></span></h2><br>
+     <div id="successEditUsuario" style="display:none;">
+     </div>
+     <div class="row">
+      <div class="col-md-8">
+       <label>Nombre</label>
+       <input type="text" id="nombreUsuario" name="Nombre" class="form-control" placeholder="Nombre">
+      </div>
+      <div class="col-md-4">
+       <label>Departamento</label>
+       <select id="departamento_idUsuario" class="form-control">
+       <?php 
+         $output = mysql_query("SELECT id, nombre FROM DEPARTAMENTO") or die(mysql_error());
+         while ($lista = mysql_fetch_assoc($output)){
+          echo '<option value="'.$lista["id"].'">'.$lista["nombre"].'</option>';
+         }
+       ?>
+       </select>
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-6">
+       <label>Usuario</label>
+       <input type="text" id="usuarioUsuario" name="usuario" class="form-control" placeholder="Usuario">
+      </div>
+      <div class="col-md-6">
+       <label>Password</label>
+       <input type="password" id="passwordUsuario" name="password" class="form-control" placeholder="Password">
+      </div>
+     </div>
+
+    </div>
+   </div>
+   <div class="modal-footer">
+    <input id="actualizarUsuario" type="button" class="btn btn-primary btn-lg" value="Actualizar">
+    <input type="button" onclick="$('div#successEditUsuario').hide();$('#actualizarUsuario').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
+   </div>
+  </div>
+ </div>
+</div>
+
+<div id="nuevoUsuarioModal" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#nuevoUsuarioModal').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+    <div class="bootbox-body">
+     <h2>Usuario Nuevo</h2><br>
+     <div id="successAddUsuario" style="display:none;"></div>
+     <div class="row">
+      <div class="col-md-8">
+       <label>Nombre</label>
+       <input type="text" id="nombreUsuarioNuevo" name="Nombre" class="form-control" placeholder="Nombre">
+      </div>
+      <div class="col-md-4">
+       <label>Departamento</label>
+       <select id="departamento_idUsuarioNuevo" class="form-control">
+       <?php 
+         $output = mysql_query("SELECT id, nombre FROM DEPARTAMENTO") or die(mysql_error());
+         while ($lista = mysql_fetch_assoc($output)){
+          echo '<option value="'.$lista["id"].'">'.$lista["nombre"].'</option>';
+         }
+       ?>
+       </select>
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-6">
+       <label>Usuario</label>
+       <input type="text" id="usuarioUsuarioNuevo" name="usuario" class="form-control" placeholder="Usuario">
+      </div>
+      <div class="col-md-6">
+       <label>Password</label>
+       <input type="password" id="passwordUsuarioNuevo" name="password" class="form-control" placeholder="Password">
+      </div>
+     </div>
+
+    </div>
+   </div>
+   <div class="modal-footer">
+    <button id="nuevoUsuario" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Nuevo</button>
+    <input type="button" onclick="$('div#successAddUsuario').hide();$('#nuevoUsuarioModal').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
    </div>
   </div>
  </div>

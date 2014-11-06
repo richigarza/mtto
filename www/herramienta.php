@@ -14,7 +14,7 @@
    $query = "SELECT * FROM HERRAMIENTA";
    $output = mysql_query($query) or die(mysql_error());
    while ($lol = mysql_fetch_assoc($output)){
-    echo '<tr><td>'.$lol["id"].'</td><td>'.$lol["nombre"].'</td><td>'.$lol["descripcion"].'</td><td>'.$lol["unidades_disponibles"].'</td><td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#actualizarHerramienta" onclick="cargarActualizarHerramienta('.$lol["id"].')"><span class="glyphicon glyphicon-pencil"></span> Modificar Unidad</button> <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle"></span> Eliminar Equipo</button></td></tr>';
+    echo '<tr><td>'.$lol["id"].'</td><td>'.$lol["nombre"].'</td><td>'.$lol["descripcion"].'</td><td>'.$lol["unidades_disponibles"].'</td><td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#actualizarHerramienta" onclick="cargarActualizarHerramienta('.$lol["id"].')"><span class="glyphicon glyphicon-pencil"></span> Modificar</button> <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle"></span> Eliminar</button></td></tr>';
    }
   ?>
  </tbody>

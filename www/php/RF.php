@@ -5,8 +5,8 @@
 header('Content-type: application/json');
 include("../config.php");
 
-if (isset($_POST["DP"])){
-  $query = 'SELECT * FROM REFACCION WHERE id="'.$_POST["DP"].'"';
+if (isset($_POST["RF"])){
+  $query = 'SELECT * FROM REFACCION WHERE id="'.$_POST["RF"].'"';
   $output = mysql_query($query) or die(mysql_error());
   $result = mysql_fetch_assoc($output);
   $result['success'] = true;
