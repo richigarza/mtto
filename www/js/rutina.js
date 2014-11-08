@@ -1,9 +1,41 @@
+function mostrarEditarDetallesRutina(){
+ var datos = {};
+ var id = $("span#TitleActualizarRutina").text();
+ datos["RU_DE"] = id;
+ $.ajax({
+   url: "php/RU.php",
+       type: "post",
+       datatype:"json",
+       data: datos,
+       success: function(response){
+       if(response.success){
+	 delete response.success;
+	 var string = "";
+	 var num = 0;
+	 for (var key in response){
+	   num = response[key]['numero_paso'];
+	   string += "<tr><td>" + num + "</td><td>" + response[key]['descripcion'] + "</td><td>" + response[key]['tiempo_ejecucion'] + "</td><td><button class='btn btn-default' onclick='"+ response[key]['id']+"'><span class='glyphicon glyphicon-pencil'></span></button></td></tr>";
+	 }
+	 $("span#TitleRutinaDetalle").html(id);
+	 string += '<tr><td><span id="pasoNuevo">' + ++num +'</span></td><td><textarea id="procedimientoNuevo" placeholder="procedimiento" class="form-control"></textarea></td><td><input id="tiempoNuevo" type="text" placeholder="tiempo" class="form-control"></td><td><button class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span></button></td></tr>';
+
+	 $("tbody#tablaRutinasDetalleInputs").html(string);
+       }else{
+	 console.log(response.success);
+	 console.log(response.msg);
+	 delete response.msg;
+	 delete response.success;
+       }
+     }
+   });
+}
+
 $("button#nuevoRutina").click(function(){
     var datos = {};
     datos['nuevo'] = 1;
     datos['equipo_id'] = $("select#equipoRutinaNuevo").val();
     datos['tiempo_procedimiento'] = $("input#tiempo_procedimientoNuevo").val();
-    datos['descripcion'] = $("textarea#descripcionRutinaNuevo").val();
+    datos['descripcion'] = $("textarea#descripcionRutinaNuevoOB").val();
     datos['editor'] = $('span#username').text();
  $.ajax({
    url: "php/RU.php",
@@ -103,7 +135,6 @@ function mostrarDetallesRutina(id){
 	 var string = "";
 	 for (var key in response){
 	   string += "<tr><td>" + response[key]['numero_paso'] + "</td><td>" + response[key]['descripcion'] + "</td><td>" + response[key]['tiempo_ejecucion'] + "</td></tr>";
-	     console.log(string);
 	 }
 	 $("span#TitleRutinas").html(id);
 	 $("tbody#tablaRutinasDetalle").html(string);

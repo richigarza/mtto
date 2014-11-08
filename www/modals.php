@@ -68,11 +68,49 @@
    </div>
    <div class="modal-footer">
     <input id="actualizarRutina" type="button" class="btn btn-primary btn-lg" value="Actualizar">
+    <button id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#RutinaDetalleModal" onclick="mostrarEditarDetallesRutina();OA"><span class="glyphicon glyphicon-pencil"></span> Detalles</button>
     <input type="button" onclick="$('div#successEditRutina').hide();$('#actualizarRutina').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
    </div>
   </div>
  </div>
 </div>
+
+<div id="RutinaDetalleModal" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#RutinaDetalleModal').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+    <div class="bootbox-body">
+     <h2>Detalles de Rutina #<span id="TitleRutinaDetalle"></span></h2><br>
+     <div id="successEditRutinaDetalle" style="display:none;"></div>
+      <table class="table table-condensed table-hover">
+       <thead>
+        <tr>
+	 <th>Paso #</th>
+	 <th>Procedimiento</th>
+	 <th>Tiempo</th>
+	 <th></th>
+	</tr>
+       </thead>
+       <tbody id="tablaRutinasDetalleInputs">
+	<tr>
+	 <td><span id="pasoNuevo"></span></td>
+	 <td><textarea id="procedimientoNuevo" placeholder="procedimiento" class="form-control"></textarea></td>
+         <td><input id="tiempoNuevo" type="text" placeholder="tiempo" class="form-control"></td>
+	 <td><button class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span></button></td>
+	</tr>
+       </tbody>
+      </table>	   
+    </div>
+   </div>
+   <div class="modal-footer">
+    <button id="saveRutinaDetalle" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-saved"></span> Guardar</button>
+    <input type="button" onclick="$('div#successEditRutinaDetalle').hide();$('#RutinaDetalleModal').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
+   </div>
+  </div>
+ </div>
+</div>
+
 
 <div id="nuevoRutinaModal" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
  <div class="modal-dialog">
