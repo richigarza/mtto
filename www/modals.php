@@ -1,3 +1,120 @@
+<!-- Rutinas -->
+<div id="verDetalles" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#verDetalles').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+    <div class="bootbox-body">
+
+   <h2>Detalle de Rutina #<span id="TitleRutinas"></span></h2><br>
+     <div class="panel-body">
+      <table class="table table-condensed table-hover">
+       <thead>
+        <tr>
+	 <th>Paso #</th>
+	 <th>Procedimiento</th>
+	 <th>Tiempo</th>
+	</tr>
+       </thead>
+       <tbody id="tablaRutinasDetalle">
+       </tbody>
+      </table>
+     </div>
+
+    </div>
+   </div>
+   <div class="modal-footer">
+    <input type="button" onclick="$('#verDetalles').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
+   </div>
+  </div>
+ </div>
+</div>
+
+<div id="actualizarRutina" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#actualizarRutina').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+    <div class="bootbox-body">
+
+     <h2>Modificar Rutina #<span id="TitleActualizarRutina"></span></h2><br>
+     <div id="successEditRutina" style="display:none;">
+     </div>
+     <div class="row">
+      <div class="col-md-6">
+       <label>Equipo</label>
+       <select id="equipoRutina" class="form-control">
+       <?php 
+         $output = mysql_query("SELECT id, nombre FROM EQUIPO") or die(mysql_error());
+         while ($lista = mysql_fetch_assoc($output)){
+          echo '<option value="'.$lista["id"].'">'.$lista["nombre"].'</option>';
+         }
+       ?>
+       </select>
+      </div>
+      <div class="col-md-6">
+       <label>Tiempo de Rutina</label>
+       <input id="tiempo_procedimiento" name="tiempo_procedimiento" class="form-control" placeholder="Tiempo">
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-12">
+       <label>Descripción</label>
+       <textarea id="descripcionRutina" name="Descripcion" class="form-control" placeholder="Descripcion"></textarea>
+      </div>
+     </div>
+
+    </div>
+   </div>
+   <div class="modal-footer">
+    <input id="actualizarRutina" type="button" class="btn btn-primary btn-lg" value="Actualizar">
+    <input type="button" onclick="$('div#successEditRutina').hide();$('#actualizarRutina').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
+   </div>
+  </div>
+ </div>
+</div>
+
+<div id="nuevoRutinaModal" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#nuevoRutinaModal').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+    <div class="bootbox-body">
+     <h2>Nueva Rutina</h2><br>
+     <div class="row">
+      <div class="col-md-6">
+       <label>Equipo</label>
+       <select id="equipoRutinaNuevo" class="form-control">
+       <?php 
+         $output = mysql_query("SELECT id, nombre FROM EQUIPO") or die(mysql_error());
+         while ($lista = mysql_fetch_assoc($output)){
+          echo '<option value="'.$lista["id"].'">'.$lista["nombre"].'</option>';
+         }
+       ?>
+       </select>
+      </div>
+      <div class="col-md-6">
+       <label>Tiempo de Rutina</label>
+       <input id="tiempo_procedimientoNuevo" name="tiempo_procedimiento" class="form-control" placeholder="Tiempo">
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-12">
+       <label>Descripción</label>
+       <textarea id="descripcionRutinaNuevo" name="Descripcion" class="form-control" placeholder="Descripcion"></textarea>
+      </div>
+     </div>
+
+    </div>
+   </div>
+   <div class="modal-footer">
+    <button id="nuevoRutina" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus-sign"></span> Agregar Nuevo</button>
+    <input type="button" onclick="$('div#successEditRutina').hide();$('#nuevoRutinaModal').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
+   </div>
+  </div>
+ </div>
+</div>
+
 <!-- Unidades -->
 <div id="verUnidades" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
  <div class="modal-dialog">

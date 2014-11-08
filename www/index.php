@@ -77,7 +77,7 @@ width: 900px;
 					</button>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="odt">
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Ordenes de Trabajo</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Rutinas de Mantenimiento</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="window.location.assign('index.php?p=Rutina')">Rutinas de Mantenimiento</a></li>
 					</ul>
 				</div>
 			</li>
@@ -132,6 +132,9 @@ width: 900px;
 		<div class="panel-body">
     <?php
      switch($page){
+     case "Rutina":
+       include("rutina.php");
+     break;
      case "Equipos":
        include("equipos.php");
      break;
@@ -170,6 +173,7 @@ width: 900px;
     <script src="js/refaccion.js"></script>
     <script src="js/herramienta.js"></script>
     <script src="js/personal.js"></script>
+    <script src="js/rutina.js"></script>
 
 <script>
 </script>
