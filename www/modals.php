@@ -68,7 +68,7 @@
    </div>
    <div class="modal-footer">
     <input id="actualizarRutina" type="button" class="btn btn-primary btn-lg" value="Actualizar">
-    <button id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#RutinaDetalleModal" onclick="mostrarEditarDetallesRutina();OA"><span class="glyphicon glyphicon-pencil"></span> Detalles</button>
+    <button id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#RutinaDetalleModal" onclick="mostrarEditarDetallesRutina();"><span class="glyphicon glyphicon-pencil"></span> Detalles</button>
     <input type="button" onclick="$('div#successEditRutina').hide();$('#actualizarRutina').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
    </div>
   </div>
@@ -93,11 +93,11 @@
 	</tr>
        </thead>
        <tbody id="tablaRutinasDetalleInputs">
-	<tr>
+        <tr>
 	 <td><span id="pasoNuevo"></span></td>
 	 <td><textarea id="procedimientoNuevo" placeholder="procedimiento" class="form-control"></textarea></td>
          <td><input id="tiempoNuevo" type="text" placeholder="tiempo" class="form-control"></td>
-	 <td><button class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span></button></td>
+	 <td><button id="addPasoRutina" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span></button></td>
 	</tr>
        </tbody>
       </table>	   

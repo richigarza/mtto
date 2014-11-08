@@ -11,6 +11,11 @@ if (isset($_POST["RU"])){
   $result = mysql_fetch_assoc($output);
   $result['success'] = true;
 
+}else if(isset($_POST["rutina_id"])){
+  $query = 'INSERT INTO RUTINA_DETALLE (rutina_id, numero_paso, descripcion, tiempo_ejecucion, estatus, ultima_fecha_actualizacion, ultimo_editor) VALUES("'.$_POST['rutina_id'].'","'.$_POST['numero_paso'].'","'.$_POST['descripcion'].'","'.$_POST['tiempo_ejecucion'].'", "A","'.date("Y-m-d H:i:s").'","'.$_POST["editor"].'")';
+  mysql_query($query) or die(mysql_error());
+  $result['success'] = true;
+
 }else if (isset($_POST["RU_DE"])){
   $result['success'] = true;
   $query = 'SELECT * FROM RUTINA_DETALLE WHERE rutina_id="'.$_POST["RU_DE"].'"';

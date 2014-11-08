@@ -1,3 +1,33 @@
+function addPasoRutina(){
+    var datos = {};
+    datos['rutina_id'] = $("span#TitleActualizarRutina").text();
+    datos['numero_paso'] = $("span#pasoNuevo").text();
+    datos['tiempo_ejecucion'] = $("input#tiempoNuevo").val();
+    datos['descripcion'] = $("textarea#procedimientoNuevo").val();
+    datos['editor'] = $('span#username').text();
+    if ( datos['tiempo_ejecucion'] == "" || datos['descripcion'] == "" || datos['numero_paso'] == "" || datos['editor'] == "" ){
+	alert("Un campo esta nulo");
+    }else{
+	$.ajax({
+	    url: "php/RU.php",
+	    type: "post",
+	    datatype:"json",
+	    data: datos,
+	    success: function(response){
+		if(response.success){
+		    delete response.success;
+		    mostrarEditarDetallesRutina();
+		}else{
+		    console.log(response.success);
+		    console.log(response.msg);
+		    delete response.msg;
+		    delete response.success;
+		} 
+	    }
+	});
+    }
+}
+
 function mostrarEditarDetallesRutina(){
  var datos = {};
  var id = $("span#TitleActualizarRutina").text();
@@ -17,7 +47,7 @@ function mostrarEditarDetallesRutina(){
 	   string += "<tr><td>" + num + "</td><td>" + response[key]['descripcion'] + "</td><td>" + response[key]['tiempo_ejecucion'] + "</td><td><button class='btn btn-default' onclick='"+ response[key]['id']+"'><span class='glyphicon glyphicon-pencil'></span></button></td></tr>";
 	 }
 	 $("span#TitleRutinaDetalle").html(id);
-	 string += '<tr><td><span id="pasoNuevo">' + ++num +'</span></td><td><textarea id="procedimientoNuevo" placeholder="procedimiento" class="form-control"></textarea></td><td><input id="tiempoNuevo" type="text" placeholder="tiempo" class="form-control"></td><td><button class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span></button></td></tr>';
+	 string += '<tr><td><span id="pasoNuevo">' + ++num +'</span></td><td><textarea id="procedimientoNuevo" placeholder="procedimiento" class="form-control"></textarea></td><td><input id="tiempoNuevo" type="number" min="1" placeholder="tiempo" class="form-control"></td><td><button type="button" onclick="addPasoRutina();" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span></button></td></tr>';
 
 	 $("tbody#tablaRutinasDetalleInputs").html(string);
        }else{
@@ -35,7 +65,7 @@ $("button#nuevoRutina").click(function(){
     datos['nuevo'] = 1;
     datos['equipo_id'] = $("select#equipoRutinaNuevo").val();
     datos['tiempo_procedimiento'] = $("input#tiempo_procedimientoNuevo").val();
-    datos['descripcion'] = $("textarea#descripcionRutinaNuevoOB").val();
+    datos['descripcion'] = $("textarea#descripcionRutinaNuevo").val();
     datos['editor'] = $('span#username').text();
  $.ajax({
    url: "php/RU.php",
@@ -44,7 +74,6 @@ $("button#nuevoRutina").click(function(){
        data: datos,
        success: function(response){
        if(response.success){
-	 console.log(response);
 	 delete response.success;
 	 cargarActualizarRutina(response['id']);
 	 $('#nuevoRutinaModal').modal('hide');
