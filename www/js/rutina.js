@@ -1,3 +1,60 @@
+$("button#saveRutinaDetalle").click(function(){
+    var datos = {};
+    datos['rutina_idModificar'] = $("span#TitleActualizarRutina").text();
+    datos['numero_paso'] = $("span#pasoModificar").text();
+    datos['tiempo_ejecucion'] = $("input#tiempoModificar").val();
+    datos['descripcion'] = $("textarea#procedimientoModificar").val();
+    datos['editor'] = $('span#username').text();
+    if ( !datos['tiempo_ejecucion'] || !datos['descripcion'] || !datos['numero_paso'] || !datos['editor'] ){
+	alert("Un campo esta Nulo o no estas modificando un Paso que ya existe");
+    }else{
+	$.ajax({
+	    url: "php/RU.php",
+	    type: "post",
+	    datatype:"json",
+	    data: datos,
+	    success: function(response){
+		if(response.success){
+		    delete response.success;
+		    mostrarEditarDetallesRutina();
+		}else{
+		    console.log(response.success);
+		    console.log(response.msg);
+		    delete response.msg;
+		    delete response.success;
+		} 
+	    }
+	});
+    }
+    
+});
+function eliminarPasoRutina(id, num){
+    if(confirm("Seguro que deseas borrar el paso #" + num)){
+	var datos = {};
+	datos['rm_id'] = id;
+	datos['rutina_id'] = $("span#TitleActualizarRutina").text();
+	datos['numero_paso'] = num;
+	datos['editor'] = $('span#username').text();
+	$.ajax({
+	    url: "php/RU.php",
+	    type: "post",
+	    datatype:"json",
+	    data: datos,
+	    success: function(response){
+		if(response.success){
+		    delete response.success;
+		    mostrarEditarDetallesRutina();
+		}else{
+		    console.log(response.success);
+		    console.log(response.msg);
+		    delete response.msg;
+		    delete response.success;
+		} 
+	    }
+	});
+    }
+}
+
 function addPasoRutina(){
     var datos = {};
     datos['rutina_id'] = $("span#TitleActualizarRutina").text();
@@ -5,7 +62,7 @@ function addPasoRutina(){
     datos['tiempo_ejecucion'] = $("input#tiempoNuevo").val();
     datos['descripcion'] = $("textarea#procedimientoNuevo").val();
     datos['editor'] = $('span#username').text();
-    if ( datos['tiempo_ejecucion'] == "" || datos['descripcion'] == "" || datos['numero_paso'] == "" || datos['editor'] == "" ){
+    if ( !datos['tiempo_ejecucion'] || !datos['descripcion'] || !datos['numero_paso'] || !datos['editor'] ){
 	alert("Un campo esta nulo");
     }else{
 	$.ajax({
@@ -28,7 +85,7 @@ function addPasoRutina(){
     }
 }
 
-function mostrarEditarDetallesRutina(){
+function mostrarEditarDetallesRutina(act){
  var datos = {};
  var id = $("span#TitleActualizarRutina").text();
  datos["RU_DE"] = id;
@@ -44,11 +101,16 @@ function mostrarEditarDetallesRutina(){
 	 var num = 0;
 	 for (var key in response){
 	   num = response[key]['numero_paso'];
-	   string += "<tr><td>" + num + "</td><td>" + response[key]['descripcion'] + "</td><td>" + response[key]['tiempo_ejecucion'] + "</td><td><button class='btn btn-default' onclick='"+ response[key]['id']+"'><span class='glyphicon glyphicon-pencil'></span></button></td></tr>";
+	   if(response[key]['id'] == act){
+	       string += '<tr><td><span id="pasoModificar">' + num +'</span></td><td><textarea id="procedimientoModificar" placeholder="procedimiento" class="form-control">'+ response[key]["descripcion"] +'</textarea></td><td><input id="tiempoModificar" value="'+ response[key]["tiempo_ejecucion"] + '" type="number" min="1" placeholder="tiempo" class="form-control"></td><td><button type="button" onclick="eliminarPasoRutina('+ response[key]["id"] + ', ' +num+');" class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle"></span></button></td></tr>';
+	   }else{
+	       string += "<tr><td>" + num + "</td><td>" + response[key]['descripcion'] + "</td><td>" + response[key]['tiempo_ejecucion'] + "</td><td><button class='btn btn-default' onclick='mostrarEditarDetallesRutina("+ response[key]['id']+");'><span class='glyphicon glyphicon-pencil'></span></button></td></tr>";
+	   }
 	 }
 	 $("span#TitleRutinaDetalle").html(id);
+	 if (!act){
 	 string += '<tr><td><span id="pasoNuevo">' + ++num +'</span></td><td><textarea id="procedimientoNuevo" placeholder="procedimiento" class="form-control"></textarea></td><td><input id="tiempoNuevo" type="number" min="1" placeholder="tiempo" class="form-control"></td><td><button type="button" onclick="addPasoRutina();" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span></button></td></tr>';
-
+	 }
 	 $("tbody#tablaRutinasDetalleInputs").html(string);
        }else{
 	 console.log(response.success);
