@@ -48,7 +48,7 @@
         </div>
        </div>
        <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
          <label>Técnico</label>	  
           <select id="usuarioODT" class="form-control">
 	   <option disabled selected>Seleccione</option>
@@ -60,6 +60,12 @@
        ?>
          </select>
         </div>
+        <div class="col-md-6">
+         <label>Rutina</label>	  
+          <select id="rutinaODT" class="form-control">
+	   <option disabled selected>Seleccione</option>
+	  </select>
+	</div>
        </div>	 
       </div>
      </div>

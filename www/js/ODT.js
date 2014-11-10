@@ -3,6 +3,7 @@ $("button#nuevoODTBoton").click(function(){
     datos["nuevo"] = 1;
     datos["equipo_id"] = $("select#equipoODT").val();
     datos["usuario_id"] = $("select#usuarioODT").val();
+    datos["rutina_id"] = $("select#rutinaODT").val();
     datos["unidad_equipo_id"] = $("select#unidadODT").val();
     datos["hora"] = $("select#horaODT").val();
     datos["fecha"] = $("input#fechaODT").val();
@@ -38,8 +39,13 @@ function getEquipo(){
        if(response.success){
 	 delete response.success;
 	 var string = "";
-	 for (var key in response){
-	     string += "<option value='"+response[key]['id']+"'>"+response[key]['descripcion']+"</option>";
+	 for (var key in response[0]){
+	     string += "<option value='"+response[0][key]['id']+"'>"+response[0][key]['descripcion']+"</option>";
+         }
+	 $("select#rutinaODT").html(string);
+	 var string = "";
+	 for (var key in response[1]){
+	     string += "<option value='"+response[1][key]['id']+"'>"+response[1][key]['descripcion']+"</option>";
          }
 	 $("select#unidadODT").html(string);
        }else{
