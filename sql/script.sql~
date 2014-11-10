@@ -1,0 +1,1 @@
+ALTER TABLE  `UNIDAD_EQUIPO` ADD  `proximo_mantenimiento` DATE NOT NULL COMMENT  'El mtto preventivo' AFTER  `ultimo_mantenimiento` ;
