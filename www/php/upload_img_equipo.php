@@ -12,21 +12,14 @@
 
 <?php
 /////////////////////////////
-// ODT.php
+// upload_img_equipo.php
 ////////////////////////////
 include("../config.php");
 
-function upload($id_ODT, $formato, $tmp, $editor, $id_UQ){
-  $uploadfile = "../evidencias/".$id_ODT."-".date("Y-m-d-H:i:s")."".$formato;
+function upload($formato, $tmp, $editor, $id){
+  $uploadfile = "../img/".$id."".$formato;
   if (move_uploaded_file($tmp, $uploadfile)) {
-    $query = "UPDATE ODT SET odt_estatus_id=3, ultima_fecha_actualizacion='".date('Y-m-d H:i:s')."', ultimo_editor='".$editor."' WHERE id=".$id_ODT;
-    mysql_query($query) or die(mysql_error());
-
-    $query = mysql_query("SELECT EQ.tiempo_mantenimiento FROM EQUIPO EQ, UNIDAD_EQUIPO UQ WHERE UQ.id=".$id_ODT." AND UQ.equipo_id = EQ.ID") or die(mysql_error());
-    $query = mysql_fetch_assoc($query);
-    $proximo_mtto = date_format(date_add(date_create(date('Y-m-d')), date_interval_create_from_date_string($query["tiempo_mantenimiento"].' days')), 'Y-m-d');
-
-    $query = "UPDATE UNIDAD_EQUIPO SET ultimo_mantenimiento='".date('Y-m-d H:i:s')."', proximo_mantenimiento='".$proximo_mtto."' WHERE id=".$id_UQ;
+    $query = "UPDATE EQUIPO SET imagen_equipo='".$id."".$formato."', ultima_fecha_actualizacion='".date('Y-m-d H:i:s')."', ultimo_editor='".$editor."' WHERE id=".$id;
     mysql_query($query) or die(mysql_error());
 
 
@@ -48,9 +41,9 @@ if (isset($_FILES['img'])){
   if($filesize < $max){
     if($filesize > 0){
       if(ereg(".jpg", $filename)){
-	$result = upload($_POST['id_ODT'], ".jpg", $_FILES['img']['tmp_name'], $_POST['editor'], $_POST['id_UQ']);
+	$result = upload(".jpg", $_FILES['img']['tmp_name'], $_POST['editor'], $_POST['id']);
       }else if (ereg(".png", $filename)){
-	$result = upload($_POST['id_ODT'], ".png", $_FILES['img']['tmp_name'], $_POST['editor'], $_POST['id_UQ']);	  
+	$result = upload(".png", $_FILES['img']['tmp_name'], $_POST['editor'], $_POST['id']);	  
       } else {
 	$result['msg'] = "Sólo se permiten imágenes en formato jpg. y png., no se ha podido adjuntar.";
 	$result['success'] = false;
@@ -75,7 +68,7 @@ if ($result["success"]){
 echo $result['msg']."</div>";
 ?>
 <script>
-setTimeout("window.location='../index.php?p=ODT'", 2500);
+setTimeout("window.location='../index.php?p=Equipos'", 2500);
 </script>
    </div>        
    <div class="modal-footer">

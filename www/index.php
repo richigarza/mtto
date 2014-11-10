@@ -20,7 +20,11 @@ width: 900px;
       include("config.php");
       include("modals.php");
   if (isset($_SESSION['username'])) {
-     $page = $_GET['p'];
+    try{
+      $page = $_GET["p"];
+    }catch(Exception $e) {
+      $page = "";
+    }
   ?>
   <body>
 
@@ -186,6 +190,29 @@ width: 900px;
     <script src="js/rutina.js"></script>
 
 <script>
+function eliminar(id, tb){
+  if (confirm("Desea eliminar el "+ tb + " #" + id )){
+    var datos = {};
+    datos['id_eliminar'] = id;
+    datos['tb_eliminar'] = tb;
+    $.ajax({
+      url: "php/eliminar.php",
+	  type: "post",
+	  datatype:"json",
+	  data: datos,
+	  success: function(response){
+	  if(response.success){
+	    delete response.success;
+	  }else{
+	    console.log(response.success);
+	    console.log(response.msg);
+	    delete response.msg;
+	    delete response.success;
+	  }
+	}
+      });
+  }
+}
 </script>
   </body>
 </html>

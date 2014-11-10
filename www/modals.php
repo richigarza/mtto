@@ -1,4 +1,77 @@
 <!-- ODT -->
+<div id="nuevoODTModal" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#nuevoODTModal').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+     <div class="bootbox-body">
+      <h2>Nueva Orden de Trabajo #<span id="TitleEvidencias"></span></h2><br>
+      <div class="panel-body">
+       <div class="row">
+        <div class="col-md-6">
+         <label>Equipo</label>
+          <select id="equipoODT" class="form-control" onchange="getEquipo();">
+	   <option disabled selected>Seleccione</option>
+       <?php 
+         $output = mysql_query("SELECT id, nombre FROM EQUIPO WHERE estatus='A'") or die(mysql_error());
+         while ($lista = mysql_fetch_assoc($output)){
+          echo '<option value="'.$lista["id"].'">'.$lista["nombre"].'</option>';
+         }
+       ?>
+         </select>
+        </div>
+        <div class="col-md-6">
+         <label>Unidad</label>
+         <select id="unidadODT" class="form-control">
+	   <option disabled>Seleccione</option>
+	 </select>
+	</div>
+       </div>
+       <div class="row">
+        <div class="col-md-6">
+         <label>Fecha</label>
+	    <div class='input-group date' >
+            <input id="fechaODT"type='date' class="form-control" />
+            <span id ="MostrarCalendario" class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span> 
+            </div>
+        </div>
+        <div class="col-md-6">
+         <label>Hora</label>
+          <select id="horaODT" class="form-control" onchange="getEquipo();">
+	   <option disabled selected>Seleccione</option>
+	   <?php
+	   for($i = 0; $i < 24; $i++){
+	     echo '<option>'.$i.':00</option>';
+	   }
+?>
+         </select>
+        </div>
+       </div>
+       <div class="row">
+        <div class="col-md-12">
+         <label>Técnico</label>	  
+          <select id="usuarioODT" class="form-control">
+	   <option disabled selected>Seleccione</option>
+       <?php 
+         $output = mysql_query("SELECT id, nombre_usuario FROM USUARIO WHERE estatus='A'") or die(mysql_error());
+         while ($lista = mysql_fetch_assoc($output)){
+          echo '<option value="'.$lista["id"].'">'.$lista["nombre_usuario"].'</option>';
+         }
+       ?>
+         </select>
+        </div>
+       </div>	 
+      </div>
+     </div>
+    </div>
+   <div class="modal-footer">
+    <button id="nuevoODTBoton" type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Nuevo</button>
+    <input type="button" onclick="$('#nuevoODTModal').modal('hide');" class="btn btn-danger" value="Cerrar">
+   </div>
+  </div>
+ </div>
+</div>
+
 <div id="uploadEvidencias" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
  <div class="modal-dialog">
   <div class="modal-content">
@@ -77,7 +150,7 @@
        <label>Equipo</label>
        <select id="equipoRutina" class="form-control">
        <?php 
-         $output = mysql_query("SELECT id, nombre FROM EQUIPO") or die(mysql_error());
+         $output = mysql_query("SELECT id, nombre FROM EQUIPO WHERE estatus='A'") or die(mysql_error());
          while ($lista = mysql_fetch_assoc($output)){
           echo '<option value="'.$lista["id"].'">'.$lista["nombre"].'</option>';
          }
@@ -156,7 +229,7 @@
        <label>Equipo</label>
        <select id="equipoRutinaNuevo" class="form-control">
        <?php 
-         $output = mysql_query("SELECT id, nombre FROM EQUIPO") or die(mysql_error());
+         $output = mysql_query("SELECT id, nombre FROM EQUIPO WHERE estatus='A'") or die(mysql_error());
          while ($lista = mysql_fetch_assoc($output)){
           echo '<option value="'.$lista["id"].'">'.$lista["nombre"].'</option>';
          }
@@ -202,7 +275,6 @@
 	 <th>Departamento</th>
 	 <th>Ultimo Mtto.</th>
 	 <th>Siguiente Prog.</th>
-	 <th>Estado</th>
 	 <th>Acciones<th>
 	</tr>
        </thead>
@@ -214,6 +286,7 @@
     </div>
    </div>
    <div class="modal-footer">
+    <button data-toggle="modal" data-target="#nuevaUnidad" class="btn btn-success btn-lg" ><span class="glyphicon glyphicon-plus-sign"></span> Agregar Unidad</button>    
     <input type="button" onclick="$('#verUnidades').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
    </div>
   </div>
@@ -232,15 +305,18 @@
      </div>
      <div class="row">
       <div class="col-md-4">
-       <label>Ultimo Editor</label>
-       <input type="text" id="nombreUnidad" name="Nombre" class="form-control" placeholder="Nombre">
+       <img id="imgUnidad" width="190px">
       </div>
-      <div class="col-md-4">
-       <label>Estatus</label>
-       <select id="estatusUnidad" class="form-control"><option>I</option><option>A</option></select>
-      </div>
-      <div class="col-md-4">
-       <img id="imgUnidad">
+      <div class="col-md-6">
+       <label>Departamento</label>
+       <select id="departamento_idUnidad" class="form-control">
+       <?php 
+         $output = mysql_query("SELECT id, nombre FROM DEPARTAMENTO WHERE estatus='A'") or die(mysql_error());
+         while ($lista = mysql_fetch_assoc($output)){
+          echo '<option value="'.$lista["id"].'">'.$lista["nombre"].'</option>';
+         }
+       ?>
+       </select>
       </div>
      </div>
      <div class="row">
@@ -253,8 +329,49 @@
     </div>
    </div>
    <div class="modal-footer">
-    <input id="actualizarUnidad" type="button" class="btn btn-primary btn-lg" value="Actualizar">
+    <input onclick="actualizarUnidad();" type="button" class="btn btn-primary btn-lg" value="Actualizar">
     <input type="button" onclick="$('div#successEditUnidad').hide();$('#actualizarUnidad').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
+   </div>
+  </div>
+ </div>
+</div>
+
+<div id="nuevaUnidad" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#nuevaUnidad').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+    <div class="bootbox-body">
+
+     <h2>Nueva Unidad</span></h2><br>
+     <div class="row">
+      <div class="col-md-4">
+       <img id="imgUnidadNueva" width="190px">
+      </div>
+      <div class="col-md-6">
+       <label>Departamento</label>
+       <select id="departamento_idUnidadNueva" class="form-control">
+       <?php 
+         $output = mysql_query("SELECT id, nombre FROM DEPARTAMENTO WHERE estatus='A'") or die(mysql_error());
+         while ($lista = mysql_fetch_assoc($output)){
+          echo '<option value="'.$lista["id"].'">'.$lista["nombre"].'</option>';
+         }
+       ?>
+       </select>
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-md-12">
+       <label>Descripción</label>
+       <textarea id="descripcionUnidadNueva" name="Descripcion" class="form-control" placeholder="Descripcion"></textarea>
+      </div>
+     </div>
+
+    </div>
+   </div>
+   <div class="modal-footer">
+    <input id="unidadNueva" type="button" class="btn btn-primary btn-lg" value="Actualizar">
+    <input type="button" onclick="$('div#successEditUnidad').hide();$('#nuevaUnidad').modal('hide');" class="btn btn-danger btn-lg" value="Cerrar">
    </div>
   </div>
  </div>
@@ -272,13 +389,26 @@
      <div id="successEditEquipo" style="display:none;">
      </div>
      <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-4">
+       <img id="imgEquipo" width="190">
+      </div>
+	<form action="php/upload_img_equipo.php" method="post" enctype="multipart/form-data">
+	 <div class="col-md-8">
+	  <label>Selecciona una imagen</label>
+          <input type="file" name="img" class="form-control"> <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-upload"></span> Subir</button>
+          <input type="text" id="id_equipo_input" name="id" hidden>
+          <input type="text" id="editor_equipo_input" name="editor" hidden>
+	 </div>
+	</form>
+     </div>
+     <div class="row">
+      <div class="col-md-6">
        <label>Nombre</label>
        <input type="text" id="nombreEquipo" name="Nombre" class="form-control" placeholder="Nombre">
       </div>
-      <div class="col-md-4">
-       <img id="imgEquipo">
-        <input type="file" id="uploadImgEquipo" class="form-control"> 
+      <div class="col-md-6">
+       <label>Días para mtto preventivo</label>
+       <input type="number" min="1" class="form-control" id="tiempo_mantenimiento" placeholder="número de días para el mtto">
       </div>
      </div>
      <div class="row">
@@ -287,7 +417,6 @@
        <textarea id="descripcionEquipo" name="Descripcion" class="form-control" placeholder="Descripcion"></textarea>
       </div>
      </div>
-
     </div>
    </div>
    <div class="modal-footer">
@@ -307,12 +436,13 @@
      <h2>Equipo Nuevo</h2><br>
      <div id="successAddEquipo" style="display:none;"></div>
      <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-6">
        <label>Nombre</label>
        <input type="text" id="nombreEquipoNuevo" name="Nombre" class="form-control" placeholder="Nombre">
       </div>
-      <div class="col-md-4">
-        <input type="file" id="uploadImgEquipoNuevo" class="form-control">
+      <div class="col-md-6">
+       <label>Días para mtto preventivo</label>
+       <input type="number" min="1" class="form-control" id="tiempo_mantenimientoNuevo" placeholder="número de días para el mtto">
       </div>
      </div>
      <div class="row">
@@ -416,7 +546,7 @@
        <label>Equipo</label>
        <select id="equipo_idRefaccion" class="form-control">
        <?php 
-         $output = mysql_query("SELECT id, nombre FROM EQUIPO") or die(mysql_error());
+         $output = mysql_query("SELECT id, nombre FROM EQUIPO WHERE estatus='A'") or die(mysql_error());
          while ($lista = mysql_fetch_assoc($output)){
           echo '<option value="'.$lista["id"].'">'.$lista["nombre"].'</option>';
          }
@@ -473,7 +603,7 @@
        <label>Equipo</label>
        <select id="equipo_idRefaccionNuevo" class="form-control">
        <?php 
-         $output = mysql_query("SELECT id, nombre FROM EQUIPO") or die(mysql_error());
+         $output = mysql_query("SELECT id, nombre FROM EQUIPO WHERE estatus='A'") or die(mysql_error());
          while ($lista = mysql_fetch_assoc($output)){
           echo '<option value="'.$lista["id"].'">'.$lista["nombre"].'</option>';
          }
@@ -604,7 +734,7 @@
        <label>Departamento</label>
        <select id="departamento_idUsuario" class="form-control">
        <?php 
-         $output = mysql_query("SELECT id, nombre FROM DEPARTAMENTO") or die(mysql_error());
+         $output = mysql_query("SELECT id, nombre FROM DEPARTAMENTO WHERE estatus='A'") or die(mysql_error());
          while ($lista = mysql_fetch_assoc($output)){
           echo '<option value="'.$lista["id"].'">'.$lista["nombre"].'</option>';
          }
@@ -650,7 +780,7 @@
        <label>Departamento</label>
        <select id="departamento_idUsuarioNuevo" class="form-control">
        <?php 
-         $output = mysql_query("SELECT id, nombre FROM DEPARTAMENTO") or die(mysql_error());
+         $output = mysql_query("SELECT id, nombre FROM DEPARTAMENTO WHERE estatus='A'") or die(mysql_error());
          while ($lista = mysql_fetch_assoc($output)){
           echo '<option value="'.$lista["id"].'">'.$lista["nombre"].'</option>';
          }

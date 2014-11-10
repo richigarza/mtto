@@ -12,16 +12,16 @@
   <tbody>
   <?php
    function countUnidades($id){
-   $query = "SELECT COUNT(UE.ID) AS total FROM DEPARTAMENTO DP, UNIDAD_EQUIPO UE WHERE DP.ID = UE.departamento_id AND DP.id = ".$id;
+   $query = "SELECT COUNT(UE.ID) AS total FROM DEPARTAMENTO DP, UNIDAD_EQUIPO UE WHERE DP.ID = UE.departamento_id AND DP.id = ".$id." AND UE.estatus='A'";
    $output = mysql_query($query) or die(mysql_error());
    $lol = mysql_fetch_assoc($output);
    return $lol['total'];	   
    }
-   $query = "SELECT * FROM DEPARTAMENTO ";
+   $query = "SELECT * FROM DEPARTAMENTO WHERE estatus='A'";
    $output =  mysql_query($query) or die(mysql_error());
    while ($lol = mysql_fetch_assoc($output)){
     $UE = countUnidades($lol["id"]);
-    echo '<tr><td>'.$lol["id"].'</td><td>'.$lol["nombre"].'</td><td>'.$lol["ubicacion"].'</td><td>'.$UE.'</td><td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#actualizarDepartamento" onclick="cargarActualizarDepartamento('.$lol["id"].')"><span class="glyphicon glyphicon-pencil"></span>Modificar Departamento</button> </td></tr>';
+    echo '<tr><td>'.$lol["id"].'</td><td>'.$lol["nombre"].'</td><td>'.$lol["ubicacion"].'</td><td>'.$UE.'</td><td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#actualizarDepartamento" onclick="cargarActualizarDepartamento('.$lol["id"].')"><span class="glyphicon glyphicon-pencil"></span>Modificar Departamento</button> <button class="btn btn-danger" onclick="eliminar('.$lol["id"].', \'DEPARTAMENTO\');"><span class="glyphicon glyphicon-remove-circle"></span> Eliminar</button</td></tr>';
    }
   ?>
  </tbody>

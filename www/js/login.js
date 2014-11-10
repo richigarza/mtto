@@ -14,7 +14,7 @@ function login(){
 	 $("div#successLogin").attr("class", "alert alert-success");
 	 delete response.msg;
 	 delete response.success;
-	 setTimeout("window.location='index.php'", 2000);
+	 setTimeout("window.location='index.php?p=ODT'", 2000);
        }else{
 	 $("div#successLogin").html('<strong class="glyphicon glyphicon-warning-sing"></strong> ' + response.msg);
 	 $("div#successLogin").show();
