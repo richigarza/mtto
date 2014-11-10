@@ -84,13 +84,12 @@ width: 900px;
 			
 			<li>
 				<div class="dropdown">
-					<button class="btn btn-default dropdown-toggle navbar-btn" type="button" id="odt" data-toggle="dropdown">
+					<button class="btn btn-default dropdown-toggle navbar-btn" type="button" id="odt" data-toggle="dropdown" onclick="window.location.assign('http://localhost:8080/reportes/')">
 						Reportes
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="odt">
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Reportes</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Indicadores</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Reportes e Indicadores</a></li>
 					</ul>
 				</div>
 			</li>
@@ -178,6 +177,7 @@ width: 900px;
 
    <!-- SYSMAN -->
     <script src="js/login.js"></script>
+    <script src="js/ODT.js"></script>
     <script src="js/equipos.js"></script>
     <script src="js/departamento.js"></script>
     <script src="js/refaccion.js"></script>

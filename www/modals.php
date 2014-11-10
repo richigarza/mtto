@@ -1,3 +1,35 @@
+<!-- ODT -->
+<div id="uploadEvidencias" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-body">
+    <button onclick="$('#uploadEvidencias').modal('hide');" type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true" style="margin-top: -10px;">×</button>
+     <form action="php/ODT.php" method="post" enctype="multipart/form-data">
+      <div class="bootbox-body">
+       <h2>Subir evidencia mtto #<span id="TitleEvidencias"></span></h2><br>
+       <div class="panel-body">
+        <div class="row">
+         <div class="col-md-12">
+          <label>Selecciona el archivo</label>
+          <input type="file" name="img" class="form-control">
+          <input type="text" id="id_ODT" name="id_ODT" hidden>
+          <input type="text" id="id_UQ" name="id_UQ" hidden>
+          <input type="text" id="editor" name="editor" hidden>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    <div class="modal-footer">
+     <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-upload"></span> Subir</button>
+     <input type="button" onclick="$('#uploadEvidencias').modal('hide');" class="btn btn-danger" value="Cerrar">
+    </div>
+   </form>
+  </div>
+ </div>
+</div>
+
+
 <!-- Rutinas -->
 <div id="verDetalles" class="bootbox modal fade bootbox-alert in" tabindex="-1" role="dialog" aria-hidden="false">
  <div class="modal-dialog">
