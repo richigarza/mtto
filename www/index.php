@@ -76,7 +76,7 @@ width: 900px;
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="odt">
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Ordenes de Trabajo</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="window.location.assign('index.php?p=ODT')">Ordenes de Trabajo</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="window.location.assign('index.php?p=Rutina')">Rutinas de Mantenimiento</a></li>
 					</ul>
 				</div>
@@ -132,6 +132,9 @@ width: 900px;
 		<div class="panel-body">
     <?php
      switch($page){
+     case "ODT":
+       include("odt.php");
+     break;
      case "Rutina":
        include("rutina.php");
      break;
@@ -162,12 +165,19 @@ width: 900px;
 		   </div>
 	</div>
 
+  <?php 
+       }else{
+	  include("login.php");
+	}
+?>
 <!-- SCRIPTS -->
     <!-- Bootstrap -->
 	
     <script src="js/j.js"></script>	
     <script src="js/bootstrap.min.js"></script>
+
    <!-- SYSMAN -->
+    <script src="js/login.js"></script>
     <script src="js/equipos.js"></script>
     <script src="js/departamento.js"></script>
     <script src="js/refaccion.js"></script>
@@ -177,12 +187,5 @@ width: 900px;
 
 <script>
 </script>
-
-
   </body>
-  <?php 
-       }else{
-	  include("login.php");
-	}
-?>
-  </html>
+</html>
